@@ -1,0 +1,332 @@
+(use-package catppuccin-theme
+	:config
+	(load-theme 'catppuccin t)
+	:ensure t
+	)
+
+(use-package nerd-icons
+	:ensure t
+	;; :config
+	;; (add-to-list 'nerd-icons-extension-icon-alist
+	;; 						 '("gitignore" nerd-icons-faicon "nf-fa-book" :face nerd-icons-green)t)
+	;; (add-to-list 'nerd-icons-extension-icon-alist
+	;;  						 '(".gitignore" ned-icons-faicon "nf-fa-book" :face nerd-icons-green)t)
+	;; :config
+	;; (add-to-list 'nerd-icons-regexp-icon-alist '("^\\.gitignore" nerd-icons-sucicon "nf-seti-git" :face nerd-icons-lred))
+	;; (add-to-list 'nerd-icons-regexp-icon-alist '("^\\.editorconfig" nerd-icons-sucicon "nf-seti-editorconfig" :face nerd-icons-silver))
+	:custom
+	(nerd-icons-font-family "JetBrainsMono Nerd Font Mono"))
+
+
+(use-package solaire-mode
+	:config (solaire-global-mode)
+	:ensure t
+	)
+
+;; Dashboard configuration
+(use-package dashboard
+	:ensure t
+	:after general
+	:custom
+	(dashboard-banner-logo-title "Welcome back.")
+	(dashboard-image-banner-max-height 500)
+	(dashboard-startup-banner
+	 (if (display-graphic-p)(locate-user-emacs-file "main.png") 2))
+	(dashboard-page-separator "\n")
+	(dashboard-icon-type 'nerd-icons)
+	(dashboard-navigation-cycle t)
+	(dashboard-set-heading-icons t)	(dashboard-set-file-icons t)
+	(dashboard-vertically-center-content t)
+	(dashboard-center-content t)
+	:init
+	(dashboard-setup-startup-hook))
+
+(use-package doom-modeline
+	:custom
+	(doom-modeline-indent-info t)
+	(doom-modeline-height 25)
+	(auto-revert-check-vc-info t)
+	(doom-modeline-bar-width 4)
+	:ensure t
+	:hook (after-init . doom-modeline-mode))
+
+;; Centaur tabs
+(use-package centaur-tabs
+	:ensure t
+	:bind
+	("C-S-h" . centaur-tabs-backward)
+	("C-S-l" . centaur-tabs-forward)
+	:config
+	(centaur-tabs-mode t)
+	(centaur-tabs-headline-match)
+	:custom
+	(centaur-tabs-style "bar")
+	(centaur-tabs-set-bar 'over)
+	(centaur-tabs-height 20)
+	(centaur-tabs-set-icons t)
+	(centaur-tabs-icon-type 'nerd-icons)
+	;; (centaur-tabs-cycle-scope 'tabs)
+	(centaur-tabs-show-new-tab-button nil)
+	;; (centaur-tabs-show-navigation-buttons t)
+	:hook (dashboard-mode . centaur-tabs-local-mode))
+
+;; Treemacs
+;; (use-package treemacs
+;; 	:ensure t
+;; 	:config
+;; 	(treemacs-resize-icons 30)
+;; 	(treemacs-indent-guide-mode t)
+;; 	(treemacs-git-mode 'deferred)
+;; 	(treemacs-follow-mode t)
+;; 	(treemacs-filewatch-mode t)
+;; 	(treemacs-fringe-indicator-mode 'always)
+;; 	:custom
+;; 	;; (treemacs-follow-after-init t)
+;; 	(with-eval-after-load 'treemacs
+;; 		(define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
+;; 		(define-key treemacs-mode-map [mouse-1] #'treemacs-RET-action)))
+
+;; (use-package treemacs-evil
+;; 	:after evil
+;; 	:ensure t)
+
+;; (use-package treemacs-nerd-icons
+;; 	:after (treemacs)
+;; 	:config
+;; 	(treemacs-load-theme "nerd-icons")
+;; 	:ensure t)
+
+;; (use-package treemacs-projectile
+;; 	:ensure t
+;; 	:after (treemacs projectile)
+;; 	:config
+;; 	(treemacs-project-follow-mode 1)
+;; 	(add-hook 'projectile-after-switch-project-hook
+;; 						#'treemacs-display-current-project-exclusively))
+
+(use-package dired
+  :custom
+  (dired-use-ls-dired t)
+  (dired-listing-switches
+   "-l --almost-all --group-directories-first --human-readable --no-group")
+  )
+
+(defun my/dirvish-subtree-toggle-or-open ()
+	(interactive)
+	(let ((file (dired-get-filename nil t)))
+		(if (and file (file-directory-p file))
+				(dirvish-subtree-toggle)
+			(dired-find-file)))
+	)
+
+(defun my/dired-ace-open ()
+	(interactive)
+	(let* ((file (dired-get-file-for-visit))
+				 (window (ace-window 1)))
+		(when (window-live-p window)
+			(select-window window)
+			(if (file-directory-p file)
+					(dired file)
+				(find-file file)))))
+
+(use-package dirvish
+	:after evil
+	:bind
+	(
+	 :map dirvish-mode-map
+	 ("<mouse-1>" . dirvish-subtree-toggle-or-open)
+	 ("?"   . dirvish-dispatch)          ; [?] a helpful cheatsheet
+	 ("v"   . dirvish-vc-menu)           ; [v]ersion control commands
+	 ("TAB" . dirvish-subtree-toggle)
+	 ("<RET>" . my/dirvish-subtree-toggle-or-open))
+	:config
+	(with-eval-after-load 'ace-window
+		;; (add-to-list 'aw-ignored-buffers 'dired-mode)
+		(setq aw-ignore-current t)
+		(setq aw-dispatch-always t))
+	(evil-define-key 'normal dirvish-mode-map
+		(kbd "o a") #'my/dired-ace-open)
+	(evil-make-overriding-map dirvish-mode-map 'normal)
+	(evil-define-key 'normal dirvish-mode-map
+		(kbd "RET") #'my/dirvish-subtree-toggle-or-open)
+	(dirvish-side-follow-mode t)
+	:custom
+	(dired-mouse-drag-files t)
+	(mouse-drag-and-drop-region-cross-program t)
+	(mouse-1-click-follows-link nil)
+	(dirvish-attributes '(vc-state subtree-state nerd-icons))
+	(dirvish-mode-line-format '(:left (vc-info) :right (yank index)))
+	:ensure t
+	:hook
+	(dired-mode . (lambda ()
+									(display-line-numbers-mode 0)
+									(whitespace-mode 0)))
+	:init
+	(dirvish-override-dired-mode)
+
+
+	(with-eval-after-load 'vc-hooks
+		;; Modified → orange
+		(set-face-attribute 'vc-edited-state nil
+												:foreground "#e5a50a"
+												:weight 'medium)
+
+		;; Added → green
+		(set-face-attribute 'vc-locally-added-state nil
+												:foreground "#40a02b"
+												:weight 'medium)
+
+		;; Removed → red
+		(set-face-attribute 'vc-removed-state nil
+												:foreground "#d20f39")
+
+		;; Needs update
+		(set-face-attribute 'vc-needs-update-state nil
+												:foreground "#df8e1d")
+		)
+
+
+	(with-eval-after-load 'dirvish
+		;; Ignored → very dark
+		(defface dirvish-vc-ignored-state
+			'((t (:inherit shadow)))
+			"Face for ignored files in Dirvish."
+			:group 'dirvish)
+
+		;; Untracked → subtle (no VC face exists!)
+		(defface dirvish-vc-untracked-state
+			'((t (:inherit vc-locally-added-state)))
+			"Face for untracked files in Dirvish."
+			:group 'dirvish)
+
+		;; VC → face mapping
+		(setq dirvish-vc-state-face-alist
+					'((up-to-date       . nil)
+						(edited           . dirvish-vc-edited-state)
+						(added            . vc-locally-added-state)
+						(removed          . vc-removed-state)
+						(missing          . vc-missing-state)
+						(needs-merge      . vc-conflict-state)
+						(conflict         . vc-conflict-state)
+						(unlocked-changes . vc-locked-state)
+						(needs-update     . vc-needs-update-state)
+						(ignored          . dirvish-vc-ignored-state)
+						(unregistered     . dirvish-vc-untracked-state)))
+		))
+
+(use-package nerd-icons-completion
+	:demand t
+	:hook
+	(marginalia-mode . nerd-icons-completion-marginalia-setup)
+	(after-init . nerd-icons-completion-mode))
+
+(use-package whitespace
+	:custom
+	(whitespace-style '(face tabs spaces trailing space-mark tab-mark))
+	(whitespace-display-mappings '((space-mark ?\	 [?·])
+																 (tab-mark ?\t [?→ ?\t])
+																 )
+															 ))
+
+(use-package writeroom-mode
+	:custom
+	(writeroom-fullscreen-effect 'maximized)
+	:ensure t)
+
+(use-package breadcrumb
+	:ensure t
+	:hook
+	(prog-mode . breadcrumb-local-mode)
+	:custom
+	(breadcrumb-imenu-crumb-separator
+	 (concat " "(nerd-icons-mdicon "nf-md-chevron_right") " "))
+	(breadcrumb-project-crumb-separator
+	 (concat " "(nerd-icons-mdicon "nf-md-chevron_right") " "))
+	(breadcrumb-imenu-max-length 0.5)
+	(breadcrumb-project-max-length 0.5)
+	:preface
+	;; Add icons to breadcrumb
+	(advice-add #'breadcrumb--format-project-node :around
+							(lambda (og p more &rest r)
+								"Icon For File"
+								(let ((string (apply og p more r)))
+									(if (not more)
+											(concat (nerd-icons-icon-for-file string)
+															" " string)
+										(concat (nerd-icons-faicon
+														 "nf-fa-folder_open"
+														 :face 'breadcrumb-project-crumbs-face)
+														" "
+														string)))))
+
+	(advice-add #'breadcrumb--format-ipath-node :around
+							(lambda (og p more &rest r)
+								"Icon for items"
+								(let ((string (apply og p more r)))
+									(if (not more)
+											(concat (nerd-icons-codicon
+															 "nf-cod-symbol_field"
+															 :face 'breadcrumb-imenu-leaf-face)
+															" " string)
+										(cond ((string= string "Packages")
+													 (concat (nerd-icons-codicon "nf-cod-package" :face 'breadcrumb-imenu-crumbs-face) " " string))
+													((string= string "Requires")
+													 (concat (nerd-icons-codicon "nf-cod-file_submodule" :face 'breadcrumb-imenu-crumbs-face) " " string))
+													((string= string "Method")
+													 (concat (nerd-icons-codicon "nf-cod-symbol_method" :face 'breadcrumb-imenu-crumbs-face) " " string))
+													((string= string "Class")
+													 (concat (nerd-icons-codicon "nf-cod-symbol_class" :face 'breadcrumb-imenu-crumbs-face) " " string))
+													((string= string "Field")
+													 (concat (nerd-icons-codicon "nf-cod-symbol_field" :face 'breadcrumb-imenu-crumbs-face) " " string))
+													((string= string "Module")
+													 (concat (nerd-icons-codicon "nf-cod-package" :face 'breadcrumb-imenu-crumbs-face) " " string))
+													((or (string= string "Variable") (string= string "Variables"))
+													 (concat (nerd-icons-codicon "nf-cod-symbol_variable" :face 'breadcrumb-imenu-crumbs-face) " " string))
+													((string= string "Function")
+													 (concat (nerd-icons-codicon "nf-cod-symbol_field" :face 'breadcrumb-imenu-crumbs-face) " " string))
+													(t string)))))))
+
+;; Configurations for graphic mode
+(when (display-graphic-p)
+	(tool-bar-mode 0)
+	(scroll-bar-mode 0)
+	(set-face-attribute 'default nil
+											:font "JetBrainsMono Nerd Font Mono"
+											:height 110))
+
+;; Enable mouse on terminal
+(unless (display-graphic-p)
+	(xterm-mouse-mode t))
+
+;; Remove initial tutorial screen and others
+(setq inhibit-startup-screen t
+			inhibit-startup-message t
+			initial-scratch-message nil
+			frame-resize-pixelwise t)
+
+;; Show relative line numbers
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode)
+
+(dolist (mode '(eshell-mode-hook dired-mode-hook treemacs-mode-hook lsp-ui-imenu-mode-hook image-mode-hook doc-view-mode-hook))
+	(add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+;; Enable current line highlithing
+(global-hl-line-mode t)
+
+;; Show current line number
+(column-number-mode t)
+
+;; Simplify message yes or no p
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Disable cursor blinking
+(blink-cursor-mode 0)
+
+;; Enable which key
+(which-key-mode)
+
+;; Define tab width
+(setq-default tab-width 2)
+
+(provide 'ui-cfg)

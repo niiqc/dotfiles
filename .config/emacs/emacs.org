@@ -1,0 +1,37 @@
+#+title: readme
+#+author: Nicholas Guirro
+#+description: about my emacs configuration
+#+language: en
+#+TODO: TODO(t) IN-PROGRESS(i@/!) WAIT(w@/!) | DONE(d!) CANCELED(c@)
+
+* my emacs configuration
+** notes
+*** packages
+- org mode (native)
+- evil org
+  + i'm using for compatibility with evil
+*** additional configurations
+- change ellipsis to ~⤵~
+*** ToDo List
+**** TODO add yasnippet package [0/2]
+- [ ] install and configure yasnippet
+- [ ] add templates
+**** TODO learn about org agenda
+- [ ] start
+** coding
+*** packages
+- lsp mode
+*** ToDo List
+**** TODO add mason package [0/2]
+- [ ] install and configure mason
+- [ ] add packages for the follow langs
+  + [ ] python
+
+** fix itens
+*** TODO adjust file identation
+- [ ] Revise *dtrt configuration*
+
+** IN-PROGRESS packages to view
+- [ ] Origami, outline and fold package
+- [ ] Meow or native emacs keybinds to replace evil
+- [X] Dirvish to replace treemacs

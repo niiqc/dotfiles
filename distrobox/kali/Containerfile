@@ -1,0 +1,9 @@
+FROM docker.io/kalilinux/kali-rolling:latest
+
+COPY ./install.sh .
+
+RUN chmod +x install.sh && ./install.sh
+
+WORKDIR /
+
+ENTRYPOINT [ "/usr/bin/fish" ]
