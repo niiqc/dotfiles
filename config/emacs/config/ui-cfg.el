@@ -131,6 +131,11 @@
 
 (use-package dirvish
 	:after evil
+	:custom
+	(dirvish-side-window-parameters
+	 '((no-delete-other-windows . t)
+		 (no-other-window . nil))
+	 )
 	:bind
 	(
 	 :map dirvish-mode-map
