@@ -2,6 +2,12 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+# fish colorscheme
+set walfish $HOME/.cache/wal/colors.fish
+if test -f $walfish
+    source $walfish
+end
+
 # starship
 starship init fish | source
 
