@@ -170,4 +170,14 @@
 
 (add-hook 'fish-mode-hook (lambda () (add-hook 'before-save-hook 'fish_indent-before-save)))
 
+;; Json Mode
+(use-package json
+  :config
+  (eval-after-load 'json-ts-mode
+    '(progn
+       (define-key json-ts-mode-map (kbd "M-F") #'json-pretty-print-buffer)))
+  :ensure nil
+  :hook (json-ts-mode . (lambda () (add-hook 'before-save-hook #'json-pretty-print-buffer)))
+  )
+
 (provide 'code-cfg)
