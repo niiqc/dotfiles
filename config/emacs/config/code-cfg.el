@@ -1,40 +1,8 @@
-
-;; LSP configuration
-(use-package lsp-mode
-	:commands (lsp lsp-deferred)
-	:hook (lsp-mode . lsp-enable-which-key-integration)
-	:custom
-	(lsp-auto-configure t)
-	(lsp-completion-provider :none) ;; We use corfu instead
-	(lsp-log-io nil)
-	:ensure t)
-
-(use-package lsp-diagnostics
-	:after flycheck
-	:config (lsp-diagnostics-flycheck-enable))
-
-(use-package lsp-ui
-	:commands lsp-ui-mode
-	:custom
-	(lsp-ui-sideline-show-diagnostics t)
-	(lsp-ui-sideline-show-code-actions t)
-	(lsp-ui-doc-position 'at-point)
-	(lsp-ui-doc-show-with-mouse t)
-	(lsp-ui-doc-show-with-cursor nil)
-	(lsp-ui-doc-enable t)
-	(lsp-headerline-breadcrumb-enable nil)
-	(lsp-ui-doc-delay 0)
-	:ensure t)
-
-;; TODO: Think about lsp-treemacs
-;; (use-package lsp-treemacs
-;;		:commands lsp-treemacs-errors-list
-;;		:after treemacs lsp-mode
-;;	 ;; :custom
-;;	 ;; (lsp-treemacs-theme "nerd-icons-ext")
-;;		:config
-;;		(lsp-treemacs-sync-mode 1)
-;;		:ensure t)
+(use-package eglot
+	:ensure nil
+	:bind (("C-." . eglot-code-actions))
+	:custom (eglot-autoshutdown t)
+	)
 
 (use-package dape
 	:custom
@@ -111,17 +79,15 @@
 	:init (global-diff-hl-mode))
 
 
-;; Python configuration
-(use-package lsp-mode
-	:custom
-	(lsp-ruff-server-command "")
-	;; (lsp-pylsp-server-command '("/home/nick/.config/emacs/com-pkgs/python/bin/pylsp"))
-	(lsp-pylsp-plugins-ruff-enabled t)
-	(lsp-pylsp-plugins-mypy-enabled t)
-	(lsp-pylsp-plugins-mypy-report-progress t)
-	(lsp-pylsp-plugins-flake8-enabled nil)
-	(lsp-pylsp-plugins-pydocstyle-enabled nil)
-	:hook ((python-mode python-ts-mode) . lsp-deferred))
+;; ======================================================================
+;; Python
+;; ======================================================================
+
+(use-package eglot
+	:ensure nil
+	:config (add-to-list 'eglot-server-programs
+											 '(python-base-mode . ("zuban" "server")))
+	:hook (python-base-mode . (lambda () (eglot-ensure))))
 
 (use-package python
 	:ensure nil

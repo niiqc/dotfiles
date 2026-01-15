@@ -68,11 +68,6 @@
 	"ev"	'(flycheck-verify-setup :which-key "verify setup")
 	"eb"	'(flycheck-buffer :which-key "check buffer")
 
-	;; Lsp
-	"l"		'(:ignore t :which-key "lsp")
-	"la"	'(lsp-execute-code-action :which-key "code action")
-	"lA"	'(lsp-ui-sideline-apply-code-actions :which-key "apply sideline action")
-
 	;; Windows management
 	"w"		'(:ignore t :which-key "windows")
 	"wh"	'(split-window-below :which-key "split horizontal")
