@@ -120,4 +120,12 @@
   :hook (json-ts-mode . (lambda () (add-hook 'before-save-hook #'json-pretty-print-buffer)))
   )
 
+;; ======================================================================
+;; Guile
+;; ======================================================================
+
+(use-package geiser-guile
+	:ensure t
+	)
+
 (provide 'code-cfg)
