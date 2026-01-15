@@ -36,20 +36,12 @@
 ;;		(lsp-treemacs-sync-mode 1)
 ;;		:ensure t)
 
-;; Dap debugger
-(use-package dap-mode
+(use-package dape
 	:custom
-	(dap-auto-configure-features '(sessions locals tooltip))
-	:config
-	(setq lsp-enable-dap-auto-configure nil)
-	(with-eval-after-load 'dap-ui
-		(unless (display-graphic-p)
-			(set-face-background 'dap-ui-marker-face "color-166")
-			(set-face-attribute 'dap-ui-marker-face nil :inherit nil)
-			(set-face-background 'dap-ui-pending-breakpoint-face "blue")
-			(set-face-attribute 'dap-ui-verified-breakpoint-face nil
-													:inherit 'dap-ui-pending-breakpoint-face)))
-	:ensure t)
+	(dape-buffer-window-arrangement 'right)
+	(dape-request-timeout 60)
+	:ensure t
+	)
 
 ;; Fly check
 (use-package flycheck
@@ -130,14 +122,6 @@
 	(lsp-pylsp-plugins-flake8-enabled nil)
 	(lsp-pylsp-plugins-pydocstyle-enabled nil)
 	:hook ((python-mode python-ts-mode) . lsp-deferred))
-
-(use-package dap-python
-	:config (dap-auto-configure-mode t)
-	:custom (dap-python-debugger 'debugpy)
-	:config
-	(dap-node-setup)
-	:hook (((python-mode python-ts-mode) . dap-ui-mode)
-				 ((python-mode python-ts-mode) . dap-mode)))
 
 (defun my/python-tab-setup ()
 	"Ensure Python uses literal tabs and proper visual width."
