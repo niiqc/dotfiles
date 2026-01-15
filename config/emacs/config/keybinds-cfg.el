@@ -107,11 +107,14 @@
 
 ;; TODO: Remove from keybinds
 (use-package dtrt-indent
-	:custom (dtrt-indent-run-after-smie t)
-	:config (dtrt-indent-global-mode)
+	:custom
+	(dtrt-indent-verbosity 0)
+	(dtrt-indent-run-after-smie t)
 	:ensure t
 	:hook (prog-mode . dtrt-indent-mode)
 	)
+
+
 
 
 ;; TODO: Remove from keybinds and fix tabs

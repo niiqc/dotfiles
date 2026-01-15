@@ -332,6 +332,10 @@
 (which-key-mode)
 
 ;; Define tab width
-(setq-default tab-width 2)
+(setq-default indent-tabs-mode t
+							standard-indent 2
+							tab-width 2
+							backward-delete-char-untabify-method nil
+							)
 
 (provide 'ui-cfg)
