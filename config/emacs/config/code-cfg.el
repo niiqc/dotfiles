@@ -123,21 +123,19 @@
 	(lsp-pylsp-plugins-pydocstyle-enabled nil)
 	:hook ((python-mode python-ts-mode) . lsp-deferred))
 
-(defun my/python-tab-setup ()
-	"Ensure Python uses literal tabs and proper visual width."
-	(dtrt-indent-mode t)
-	(setq-local tab-width 2)
-
-	(when indent-tabs-mode
-		(setq-local indent-line-function #'tab-to-tab-stop)
-		)
-
-	(unless indent-tabs-mode
-		(setq-local python-indent-offset standard-indent)
-		)
+(use-package python
+	:ensure nil
+	:hook
+	(python-ts-mode . (lambda ()
+											(setq-local indent-tabs-mode t)
+											(setq-local tab-width 2)
+											(setq-local python-indent-offset 2)
+											(python-indent-guess-indent-offset)
+											(setq-local tab-width python-indent-offset)
+											(dtrt-indent-mode 0)
+											(dtrt-indent-mode t)
+											))
 	)
-
-(add-hook 'python-ts-mode-hook #'my/python-tab-setup)
 
 ;; Fish mode
 (use-package fish-mode
