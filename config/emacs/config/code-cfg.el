@@ -11,10 +11,11 @@
 	:ensure t
 	)
 
-;; Fly check
-(use-package flycheck
+(use-package flymake-ruff
 	:ensure t
-	:init (global-flycheck-mode))
+	:custom (python-flymake-command nil)
+	:hook (eglot-managed-mode . flymake-ruff-load)
+	)
 
 (use-package treesit-auto
 	:config

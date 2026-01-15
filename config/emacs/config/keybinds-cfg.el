@@ -58,16 +58,6 @@
 	"t"		'(:ignore t :which-key "treemacs")
 	"tt"	'(dirvish-side :which-key "toggle treemacs")
 
-
-
-	;; Flycheck
-	"e"		'(:ignore t :which-key "errors")
-	"el"	'(flycheck-list-errors :which-key "list errors")
-	"en"	'(flycheck-next-error :which-key "next error")
-	"ep"	'(flycheck-previous-error :which-key "previous error")
-	"ev"	'(flycheck-verify-setup :which-key "verify setup")
-	"eb"	'(flycheck-buffer :which-key "check buffer")
-
 	;; Windows management
 	"w"		'(:ignore t :which-key "windows")
 	"wh"	'(split-window-below :which-key "split horizontal")
