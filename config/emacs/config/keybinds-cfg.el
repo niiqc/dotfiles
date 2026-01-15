@@ -114,9 +114,6 @@
 	:hook (prog-mode . dtrt-indent-mode)
 	)
 
-
-
-
 ;; TODO: Remove from keybinds and fix tabs
 (setq-default indent-tabs-mode t
 							standard-indent 2)
