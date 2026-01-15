@@ -56,15 +56,6 @@
 	:ensure t
 	:init (global-flycheck-mode))
 
-;; Projectile
-(use-package projectile
-	:ensure t
-	:config
-	(projectile-mode t)
-	:custom
-	(projectile-project-search-path '("/home/nick/.config/emacs" "/home/nick/Documents/Notes"))
-	)
-
 (use-package treesit-auto
 	:config
 	(global-treesit-auto-mode)
