@@ -4,6 +4,16 @@
 	:custom (eglot-autoshutdown t)
 	)
 
+(use-package mason
+	:config
+	(mason-ensure
+	 (lambda ()
+		 (dolist (pkg '("zuban" "ruff"))
+			 (unless (mason-installed-p pkg)
+				 (ignore-errors (mason-install pkg))))))
+	:ensure t
+	)
+
 (use-package dape
 	:custom
 	(dape-buffer-window-arrangement 'right)
