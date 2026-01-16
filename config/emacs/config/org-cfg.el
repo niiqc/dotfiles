@@ -11,7 +11,6 @@
 											 (visual-line-mode 1)
 											 (setq-local visual-line-move-text t)
 											 (setq-local fill-column 100)
-											 (visual-fill-column-mode 1)
 											 (display-fill-column-indicator-mode 1)))
 	:config
 	(setq org-ellipsis												 "	 ⤵"
