@@ -32,11 +32,6 @@
 	"ba"	'(centaur-tabs-kill-other-buffers-in-current-group :which-key "kill other buffers")
 	"bc"	'(consult-buffer :which-key "change tab group")
 
-	;; Projetos
-	"p"		'(:ignore t :which-key "projects")
-	"pp"	'(projectile-switch-project :which-key "switch project")
-	"pf"	'(projectile-find-file :which-key "find file in project")
-
 	;; Quit
 	"q"		'(:ignore t :which-key "quit")
 	"qq"	'(save-buffers-kill-emacs :which-key "quit Emacs")
@@ -50,10 +45,6 @@
 	"hf"	'(describe-function :which-key "describe function")
 	"hv"	'(describe-variable :which-key "describe variable")
 	"ha"	'(apropos :which-key "apropos")
-
-	;; Treemacs
-	;; "t"		'(:ignore t :which-key "treemacs")
-	;; "tt"	'(treemacs :which-key "toggle treemacs")
 
 	"t"		'(:ignore t :which-key "treemacs")
 	"tt"	'(dirvish-side :which-key "toggle treemacs")
@@ -69,18 +60,9 @@
 	"z"		'(:ignore t :which-key "writeroom-mode")
 	"zw"	'(writeroom-mode :which-key "enable writeroom-mode")
 
-	;; Ui
-	"u"		'(:ignore t :which-key "ui settings")
-	"umt"	'(imenu-list-smart-toggle :which-key "toggle imenu list")
-
 	;; Search project
 	"s" '(:ignore t :which-key "Search opts")
 	"sp" '(consult-ripgrep :which-key "Search in project")
-	"SPC" '(projectile-find-file :which-key "find files in the project")
-
-
-	;; Debugger
-	"db"	'(dap-breakpoint-toggle :which-key "toggle dap breakpoint")
 	)
 
 (general-define-key
