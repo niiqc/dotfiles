@@ -71,6 +71,26 @@
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
+;; Disable Tooltips
+(setq x-gtk-use-system-tooltips nil)
+(setq use-system-tooltips nil)
+
+;; Enable hs-minor-mode on prog mode
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
+;; Make clipboard works on wayland terminal
+(when (executable-find "wl-copy")
+	(defun wl-copy (text)
+		(let ((p (make-process :name "wl-copy" :command '("wl-copy") :connection-type 'pipe)))
+			(process-send-string p text)
+			(process-send-eof p)))
+	(setq interprogram-cut-function 'wl-copy))
+
+(when (executable-find "wl-paste")
+	(defun wl-paste ()
+		(shell-command-to-string "wl-paste"))
+	(setq interprogram-paste-function 'wl-paste))
+
 ;; Evil configuration
 (defun vim-dec-inc-delta (delta)
 	(interactive "p")
@@ -121,8 +141,6 @@
 	:after evil
 	:config
 	(evil-terminal-cursor-changer-activate))
-
-(add-hook 'prog-mode-hook #'hs-minor-mode)
 
 (use-package corfu
 	:ensure t
@@ -283,23 +301,6 @@
 					))
 	:ensure t
 	)
-
-;; Disable Tooltips
-(setq x-gtk-use-system-tooltips nil)
-(setq use-system-tooltips nil)
-
-;; Make clipboard works on wayland terminal
-(when (executable-find "wl-copy")
-	(defun wl-copy (text)
-		(let ((p (make-process :name "wl-copy" :command '("wl-copy") :connection-type 'pipe)))
-			(process-send-string p text)
-			(process-send-eof p)))
-	(setq interprogram-cut-function 'wl-copy))
-
-(when (executable-find "wl-paste")
-	(defun wl-paste ()
-		(shell-command-to-string "wl-paste"))
-	(setq interprogram-paste-function 'wl-paste))
 
 (provide 'behavior-cfg)
 
