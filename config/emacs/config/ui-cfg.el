@@ -53,6 +53,7 @@
 ;; Centaur tabs
 (use-package centaur-tabs
 	:ensure t
+	:demand
 	:bind
 	("C-S-h" . centaur-tabs-backward)
 	("C-S-l" . centaur-tabs-forward)
