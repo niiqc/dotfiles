@@ -114,13 +114,18 @@
 											))
 	)
 
-;; Fish mode
+;; ======================================================================
+;; Fish
+;; ======================================================================
+
 (use-package fish-mode
+	:hook (fish-mode-hook . (lambda () (add-hook 'before-save-hook 'finish_indent-before-save)))
 	:ensure t)
 
-(add-hook 'fish-mode-hook (lambda () (add-hook 'before-save-hook 'fish_indent-before-save)))
+;; ======================================================================
+;; Json
+;; ======================================================================
 
-;; Json Mode
 (use-package json
   :config
   (eval-after-load 'json-ts-mode
