@@ -184,8 +184,22 @@
 	:config (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
 	:ensure t)
 
+(defun my/eglot-capf ()
+	(setq-local completion-at-point-functions
+							(list (cape-capf-super
+										 #'eglot-completion-at-point
+										 #'cape-dabbrev
+										 #'cape-file
+										 #'cape-keyword
+										 ))))
+
 (use-package cape
 	:ensure t
+	:config (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+	:custom
+	(completion-category-overrides '((eglot (styles orderless))
+                                   (eglot-capf (styles orderless))))
+	:hook (eglot-managed-mode . my/eglot-capf)
 	:init
 	;; Add `completion-at-point-functions', used by `completion-at-point'.
 	(setq-default completion-at-point-functions
