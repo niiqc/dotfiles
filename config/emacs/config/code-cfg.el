@@ -4,6 +4,18 @@
 	:custom (eglot-autoshutdown t)
 	)
 
+(use-package reformatter
+  :ensure t
+  :config
+	(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
+	(add-hook 'python-ts-mode-hook 'ruff-format-on-save-mode)
+  (reformatter-define ruff-format
+		:program "ruff"
+		:args (list "format"
+								"--stdin-filename"
+								(or buffer-file-name "")
+								"-")))
+
 (use-package mason
 	:config
 	(mason-ensure
