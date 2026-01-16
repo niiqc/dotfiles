@@ -55,6 +55,12 @@
 	(diff-hl-flydiff-mode)
 	(diff-hl-margin-mode)
 	(add-hook 'diff-hl-mode-hook 'diff-hl-show-hunk-mouse-mode)
+	(add-hook 'writeroom-mode-hook
+						(lambda ()
+							(if writeroom-mode
+									(diff-hl-margin-local-mode-off)
+								(diff-hl-margin-local-mode))
+							(diff-hl-update)))
 	:hook ((magit-pre-refresh	 . diff-hl-magit-pre-refresh)
 				 (magit-post-refresh . diff-hl-magit-post-refresh)
 				 (vc-checkin				 . diff-hl-update)
