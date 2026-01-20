@@ -20,7 +20,7 @@
 	:config
 	(mason-ensure
 	 (lambda ()
-		 (dolist (pkg '("zuban" "ruff"))
+		 (dolist (pkg '("rassumfrassum" "zuban" "ruff"))
 			 (unless (mason-installed-p pkg)
 				 (ignore-errors (mason-install pkg))))))
 	:ensure t
@@ -33,11 +33,9 @@
 	:ensure t
 	)
 
-(use-package flymake-ruff
-	:ensure t
-	:custom (python-flymake-command nil)
-	:hook (eglot-managed-mode . flymake-ruff-load)
-	)
+(use-package flymake
+	:custom (flymake-fringe-indicator-position nil)
+	:ensure nil)
 
 (use-package magit
 	:custom
@@ -87,8 +85,8 @@
 (use-package eglot
 	:ensure nil
 	:config (add-to-list 'eglot-server-programs
-											 '(python-base-mode . ("zuban" "server")))
-	:hook (python-base-mode . (lambda () (eglot-ensure))))
+											 '(python-base-mode . ("rass" "--" "zuban" "server" "--" "ruff" "server")))
+	:hook (python-base-mode . eglot-ensure))
 
 (use-package python
 	:ensure nil
