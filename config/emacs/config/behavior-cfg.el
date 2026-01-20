@@ -316,6 +316,9 @@
 	:ensure t
 	)
 
+(use-package csv-mode
+	:ensure t)
+
 (provide 'behavior-cfg)
 
 ;;; behavior-cfg.el ends here
