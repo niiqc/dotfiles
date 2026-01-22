@@ -292,6 +292,12 @@
 													 (concat (nerd-icons-codicon "nf-cod-symbol_field" :face 'breadcrumb-imenu-crumbs-face) " " string))
 													(t string)))))))
 
+(use-package eshell-starship
+	:vc (:url "https://github.com/siddharthverma314/eshell-starship.git"
+						:branch "main")
+  :config
+  (eshell-starship-setup))
+
 ;; Configurations for graphic mode
 (when (display-graphic-p)
 	(tool-bar-mode 0)
