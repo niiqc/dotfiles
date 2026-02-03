@@ -1,5 +1,13 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    if command -v tmux >/dev/null 2>&1 \
+            && status is-interactive \
+            && not string match -rq screen "$TERM" \
+            && not string match -rq tmux "$TERM" \
+            && test -z "$TMUX"
+
+        tmux attach -t default; or exec tmux new -s default
+        exit
+    end
 end
 
 # fish colorscheme
