@@ -292,7 +292,7 @@
 	:config
 	(global-treesit-auto-mode)
 	;; Define itens to install
-	(dolist (lang '(bash c cpp css dockerfile html json lua python rust yaml))
+	(dolist (lang '(bash c cpp css dockerfile html json lua python rust yaml tsx typescript javascript))
 		(unless (treesit-language-available-p lang)
 			(treesit-install-language-grammar lang)))
 	:custom
@@ -312,6 +312,9 @@
 					(python			. ("https://github.com/tree-sitter/tree-sitter-python.git" "v0.23.6"))
 					(rust				. ("https://github.com/tree-sitter/tree-sitter-rust.git" "v0.23.3"))
 					(yaml				. ("https://github.com/tree-sitter-grammars/tree-sitter-yaml.git" "v0.7.2"))
+					(tsx				. ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src"))
+					(typescript	. ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src"))
+					(javascript	. ("https://github.com/tree-sitter/tree-sitter-javascript" "v0.21.2" "src"))
 					))
 	:ensure t
 	)
