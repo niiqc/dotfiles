@@ -70,18 +70,12 @@
 	:ensure t
 	:config
 	(diff-hl-flydiff-mode)
-	(diff-hl-margin-mode)
 	(add-hook 'diff-hl-mode-hook 'diff-hl-show-hunk-mouse-mode)
-	(add-hook 'writeroom-mode-hook
-						(lambda ()
-							(if writeroom-mode
-									(diff-hl-margin-local-mode-off)
-								(diff-hl-margin-local-mode))
-							(diff-hl-update)))
-	:hook ((magit-pre-refresh	 . diff-hl-magit-pre-refresh)
-				 (magit-post-refresh . diff-hl-magit-post-refresh)
-				 (vc-checkin				 . diff-hl-update)
-				 (diff-hl-mode-hook	 . diff-hl-show-hunk-mouse-mode))
+	:hook ((magit-pre-refresh		. diff-hl-magit-pre-refresh)
+				 (magit-post-refresh	. diff-hl-magit-post-refresh)
+				 (vc-checkin					. diff-hl-update)
+				 (dired-mode					. diff-hl-dired-mode)
+				 (diff-hl-mode-hook		. diff-hl-show-hunk-mouse-mode))
 	:init (global-diff-hl-mode))
 
 
