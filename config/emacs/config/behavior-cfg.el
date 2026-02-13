@@ -78,6 +78,9 @@
 ;; Enable hs-minor-mode on prog mode
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
+;; Add other files to identity a project
+(setq project-vc-extra-root-markers '(".dir-locals.el"))
+
 ;; Make clipboard works on wayland terminal
 (when (executable-find "wl-copy")
 	(defun wl-copy (text)

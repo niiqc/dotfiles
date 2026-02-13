@@ -46,9 +46,6 @@
 	"hv"	'(describe-variable :which-key "describe variable")
 	"ha"	'(apropos :which-key "apropos")
 
-	"t"		'(:ignore t :which-key "treemacs")
-	"tt"	'(dirvish-side :which-key "toggle treemacs")
-
 	;; Windows management
 	"w"		'(:ignore t :which-key "windows")
 	"wh"	'(split-window-below :which-key "split horizontal")
