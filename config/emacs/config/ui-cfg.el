@@ -35,9 +35,13 @@
 	(dashboard-page-separator "\n")
 	(dashboard-icon-type 'nerd-icons)
 	(dashboard-navigation-cycle t)
-	(dashboard-set-heading-icons t)	(dashboard-set-file-icons t)
+	(dashboard-set-heading-icons t)
+	(dashboard-set-file-icons t)
 	(dashboard-vertically-center-content t)
 	(dashboard-center-content t)
+	(dashboard-items '((recents   . 5)
+										 (projects  . 5)
+										 (bookmarks . 1)))
 	:init
 	(dashboard-setup-startup-hook))
 
