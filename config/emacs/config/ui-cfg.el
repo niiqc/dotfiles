@@ -1,6 +1,10 @@
 (use-package catppuccin-theme
 	:config
 	(load-theme 'catppuccin t)
+	(catppuccin-set-color 'base   "#0e0e11")
+	(catppuccin-set-color 'mantle "#0a0a0d")
+	(catppuccin-set-color 'crust  "#070709")
+	(catppuccin-reload)
 	:ensure t
 	)
 
