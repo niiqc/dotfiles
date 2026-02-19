@@ -173,7 +173,7 @@
 (unless (display-graphic-p)
 	(xterm-mouse-mode t))
 
-;; Resizing a frame rounds its sizes to the frame’s
+;; Resizing a frame rounds its sizes to the frame's
 (setq frame-resize-pixelwise t)
 
 ;; Show relative line numbers
