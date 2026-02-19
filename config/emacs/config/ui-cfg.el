@@ -1,10 +1,9 @@
 (use-package catppuccin-theme
 	:config
-	(load-theme 'catppuccin t)
 	(catppuccin-set-color 'base   "#0e0e11")
 	(catppuccin-set-color 'mantle "#0a0a0d")
 	(catppuccin-set-color 'crust  "#070709")
-	(catppuccin-reload)
+	(load-theme 'catppuccin t)
 	:ensure t
 	)
 
@@ -23,6 +22,7 @@
 
 
 (use-package solaire-mode
+	:defer t
 	:config (solaire-global-mode)
 	:hook (dashboard-mode . turn-off-solaire-mode)
 	:ensure t	)
@@ -50,6 +50,7 @@
 	(dashboard-setup-startup-hook))
 
 (use-package doom-modeline
+	:defer t
 	:custom
 	(doom-modeline-indent-info t)
 	(doom-modeline-height 25)
@@ -60,6 +61,7 @@
 
 ;; Centaur tabs
 (use-package centaur-tabs
+	:defer t
 	:ensure t
 	:demand
 	:bind
@@ -80,6 +82,7 @@
 	:hook ((dashboard-mode dired-mode) . centaur-tabs-local-mode))
 
 (use-package nerd-icons-dired
+	:defer t
 	:commands (nerd-icons-dired-mode)
 	:ensure t
 	:hook (dired-mode . nerd-icons-dired-mode)
@@ -92,6 +95,7 @@
 	(after-init . nerd-icons-completion-mode))
 
 (use-package whitespace
+	:defer t
 	:custom
 	(whitespace-style '(face tabs spaces trailing space-mark tab-mark))
 	(whitespace-display-mappings '((space-mark ?\	 [?·])
@@ -99,12 +103,8 @@
 																 )
 															 ))
 
-(use-package writeroom-mode
-	:custom
-	(writeroom-fullscreen-effect 'maximized)
-	:ensure t)
-
 (use-package breadcrumb
+	:defer t
 	:ensure t
 	:hook
 	(prog-mode . breadcrumb-local-mode)
@@ -165,8 +165,6 @@
 
 ;; Configurations for graphic mode
 (when (display-graphic-p)
-	(tool-bar-mode 0)
-	(scroll-bar-mode 0)
 	(set-face-attribute 'default nil
 											:font "JetBrainsMono Nerd Font Mono"
 											:height 110))
@@ -175,11 +173,8 @@
 (unless (display-graphic-p)
 	(xterm-mouse-mode t))
 
-;; Remove initial tutorial screen and others
-(setq inhibit-startup-screen t
-			inhibit-startup-message t
-			initial-scratch-message nil
-			frame-resize-pixelwise t)
+;; Resizing a frame rounds its sizes to the frame’s
+(setq frame-resize-pixelwise t)
 
 ;; Show relative line numbers
 (setq display-line-numbers-type 'relative)

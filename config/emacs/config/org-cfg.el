@@ -1,5 +1,6 @@
 ;; TODO: (Install org indent mode local plugin) - after install org-modern indent uncomment this lines
 (use-package org
+	:defer t
 	:ensure t
 	;; :hook (org-mode .	org-indent-mode)
 	:custom
@@ -27,6 +28,7 @@
 
 ;; TODO: (section evil) change it to behavior
 (use-package evil-org
+	:defer t
 	:ensure t
 	:after org
 	:hook (org-mode . evil-org-mode)
