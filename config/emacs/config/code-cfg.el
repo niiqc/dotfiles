@@ -88,15 +88,12 @@
   :hook ((tsx-ts-mode js-ts-mode typescript-ts-mode) . eglot-ensure))
 
 (use-package tsx-ts-mode
-	:defer t
 	:mode ("\\.tsx\\'"))
 
 (use-package js-ts-mode
-	:defer t
 	:mode ("\\.js\\'"))
 
 (use-package typescript-ts-mode
-	:defer t
 	:mode ("\\.ts\\'"))
 
 ;; ======================================================================
@@ -108,7 +105,6 @@
 						:branch "master"))
 
 (use-package web-mode
-	:defer t
 	:hook (web-mode . web-mode-use-tabs)
 	:mode ("\\.html\\'"))
 
@@ -195,8 +191,6 @@
 	:hook (python-base-mode . eglot-ensure))
 
 (use-package python
-	:defer t
-	:mode "\\.py\\'"
 	:ensure nil
 	:hook
 	(python-ts-mode . (lambda ()
@@ -224,8 +218,6 @@
 ;; ======================================================================
 
 (use-package json
-	:defer t
-	:mode "\\.json\\'"
 	:config
 	(eval-after-load 'json-ts-mode
 		'(progn
