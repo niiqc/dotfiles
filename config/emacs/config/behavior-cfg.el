@@ -21,12 +21,6 @@
 ;; Move to trash
 (setq delete-by-moving-to-trash t)
 
-;; Improve emacs perfomance
-(setq gc-cons-threshold 100000000)
-(setq read-process-output-max 1048576)
-
-(setq-default initial-scratch-message nil)
-
 ;; Increase undo limit
 (setq undo-limit 100000000
 			auto-save-default t)
@@ -127,6 +121,7 @@
 	(evil-collection-init))
 
 (use-package evil-goggles
+	:after evil
 	:ensure t
 	:custom
 	(evil-goggles-use-diff-faces)
@@ -212,6 +207,7 @@
 
 ;; Enable Vertico.
 (use-package vertico
+	:defer t
 	:ensure t
 	:config
 	(vertico-mouse-mode)
@@ -225,6 +221,7 @@
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
+	:ensure nil
 	:init
 	(savehist-mode))
 
@@ -252,11 +249,7 @@
 	(add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
 (use-package consult
-	:ensure t)
-
-(use-package consult-lsp
 	:defer t
-	:after lsp
 	:ensure t)
 
 (use-package embark
@@ -271,11 +264,14 @@
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
+	:defer t
 	:ensure t
 	:hook
 	(embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package gt
+	:bind (("C-x C-t " . gt-setup))
+	:defer t
 	:ensure t
 	:config
 	(setq gt-default-translator (gt-translator :engines (gt-google-engine)))
@@ -323,6 +319,7 @@
 	)
 
 (use-package csv-mode
+	:defer t
 	:ensure t)
 
 (provide 'behavior-cfg)

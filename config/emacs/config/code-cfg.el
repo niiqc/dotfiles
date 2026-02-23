@@ -5,12 +5,13 @@
 	)
 
 (use-package reformatter
+	:defer t
 	:ensure t
+	:hook (python-mode . ruff-format-on-save-mode)
+	:hook (python-ts-mode . ruff-format-on-save-mode)
+	:hook (tsx-ts-mode . biome-format-on-save-mode)
+	:hook (typescript-ts-mode . biome-format-on-save-mode)
 	:config
-	(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
-	(add-hook 'python-ts-mode-hook 'ruff-format-on-save-mode)
-	(add-hook 'tsx-ts-mode-hook 'biome-format-on-save-mode)
-	(add-hook 'typescript-ts-mode-hook 'biome-format-on-save-mode)
 	(reformatter-define biome-format
 		:program "biome"
 		:args (list "format"
@@ -34,6 +35,7 @@
 	)
 
 (use-package dape
+	:defer t
 	:custom
 	(dape-buffer-window-arrangement 'right)
 	(dape-request-timeout 60)
@@ -45,29 +47,15 @@
 	:ensure nil)
 
 (use-package magit
+	:defer t
 	:custom
 	(magit-format-file-function #'magit-format-file-nerd-icons)
 	:ensure t)
 
-(use-package magit-todos
-	:ensure t
-	:after magit
-	:config
-	(magit-todos-mode)
-	(global-hl-todo-mode)
-	(with-eval-after-load 'hl-todo
-		(setq hl-todo-keyword-faces
-					`(("TODO" warning bold)
-						("FIXME" error bold)
-						("HACK" font-lock-constant-face bold)
-						("REVIEW" font-lock-keyword-face bold)
-						("NOTE" success bold)
-						("DEPRECATED" font-lock-doc-face bold)))))
-
 ;; Diff-hl
 (use-package diff-hl
-	:after magit
 	:ensure t
+	:defer t
 	:config
 	(diff-hl-flydiff-mode)
 	(add-hook 'diff-hl-mode-hook 'diff-hl-show-hunk-mouse-mode)
@@ -112,6 +100,7 @@
 ;; Html | css
 ;; ======================================================================
 (use-package edit-indirect
+	:defer t
 	:vc (:url "https://github.com/Fanael/edit-indirect.git"
 						:branch "master"))
 
@@ -186,6 +175,7 @@
 	:hook ((css-ts-mode css-mode) . eglot-ensure))
 
 (use-package yasnippet
+	:defer t
 	:ensure t
 	:config
 	(yas-global-mode 1))
@@ -219,6 +209,7 @@
 ;; ======================================================================
 
 (use-package fish-mode
+	:defer t
 	:hook (fish-mode-hook . (lambda () (add-hook 'before-save-hook 'finish_indent-before-save)))
 	:ensure t)
 
@@ -240,7 +231,7 @@
 ;; ======================================================================
 
 (use-package geiser-guile
-	:ensure t
-	)
+	:defer t
+	:ensure t)
 
 (provide 'code-cfg)
