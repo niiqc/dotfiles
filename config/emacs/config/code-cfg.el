@@ -105,6 +105,7 @@
 						:branch "master"))
 
 (use-package web-mode
+	:ensure t
 	:hook (web-mode . web-mode-use-tabs)
 	:mode ("\\.html\\'"))
 
