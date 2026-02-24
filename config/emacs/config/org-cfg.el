@@ -15,16 +15,19 @@
 											 (display-fill-column-indicator-mode 1)))
 	:config
 	(setq org-ellipsis												 "	 ⤵"
-				;;																			 org-redisplay-inline-images					 t
-				;;																			 org-display-inline-images						 t
-				;;																			 org-startup-with-inline-images			 "inlineimages"
-				;; org-image-actual-width										300
-				org-pretty-entities											 t
-				org-fontify-whole-heading-line					 t
-				org-fontify-done-headline								 t
-				org-fontify-quote-and-verse-blocks			 t
-				;;																			 org-src-preserve-indentation					 t
-				))
+				org-redisplay-inline-images					 t
+				org-display-inline-images						 t
+				org-startup-with-inline-images			 "inlineimages"
+				;; org-image-actual-width							 300
+				org-pretty-entities									 t
+				org-fontify-whole-heading-line			 t
+				org-fontify-done-headline						 t
+				org-fontify-quote-and-verse-blocks	 t
+				org-src-preserve-indentation				 t
+				)
+	(org-babel-do-load-languages
+	 'org-babel-load-languages
+	 '((mermaid . t))))
 
 ;; TODO: (section evil) change it to behavior
 (use-package evil-org
@@ -96,6 +99,22 @@
 ;;	:ensure t
 ;;	:config
 ;;	:hook (olivetti-mode-on-hook . (lambda () (olivetti-set-width 100))))
+
+;; Mermaid
+(use-package ob-mermaid
+	:ensure t
+	:init
+  (add-to-list 'org-src-lang-modes '("mermaid" . mermaid))
+
+	(defun org/update-mmdc ()
+		(interactive)
+		(shell-command "npm update -g @mermaid-js/mermaid-cli"))
+
+	(unless (executable-find "mmdc")
+		(when (executable-find "npm")
+			(shell-command "npm install -g @mermaid-js/mermaid-cli")))
+	:defer t
+	:after org)
 
 
 (provide 'org-cfg)
