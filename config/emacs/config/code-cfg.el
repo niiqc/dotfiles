@@ -190,19 +190,15 @@
 											 '(python-base-mode . ("rass" "--" "zuban" "server" "--" "ruff" "server")))
 	:hook (python-base-mode . eglot-ensure))
 
-(use-package python
-	:ensure nil
-	:hook
-	(python-ts-mode . (lambda ()
-											(setq-local indent-tabs-mode t)
-											(setq-local tab-width 2)
-											(setq-local python-indent-offset 2)
-											(python-indent-guess-indent-offset)
-											(setq-local tab-width python-indent-offset)
-											(dtrt-indent-mode 0)
-											(dtrt-indent-mode t)
-											))
-	)
+(add-hook 'python-ts-mode-hook
+					#'(lambda ()
+							(setq-local indent-tabs-mode t
+													tab-width 2
+													python-indent-offset 2)
+							(python-indent-guess-indent-offset)
+							(setq-local tab-width python-indent-offset)
+							(dtrt-indent-mode 0)
+							(dtrt-indent-mode t)))
 
 ;; ======================================================================
 ;; Fish
