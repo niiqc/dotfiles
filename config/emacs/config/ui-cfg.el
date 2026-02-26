@@ -43,9 +43,8 @@
 	(dashboard-set-file-icons t)
 	(dashboard-vertically-center-content t)
 	(dashboard-center-content t)
-	(dashboard-items '((recents   . 5)
-										 (projects  . 5)
-										 (bookmarks . 1)))
+	(dashboard-items '((recents   . 7)
+										 (projects  . 5)))
 	:init
 	(dashboard-setup-startup-hook))
 
