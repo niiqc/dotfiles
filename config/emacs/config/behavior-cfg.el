@@ -279,11 +279,11 @@
 				`((en-pt . ,(gt-translator
 										 :taker (gt-taker :langs '(en pt) :text 'word)
 										 :engines (gt-google-engine)
-										 :render (gt-posframe-pop-render)))
+										 :render (gt-buffer-render)))
 					(pt-en . , (gt-translator
 											:taker (gt-taker :langs '(pt en) :text 'word)
 											:engines (gt-google-engine)
-											:render (gt-overlay-render)
+											:render (gt-buffer-render)
 											))
 					)))
 
