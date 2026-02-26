@@ -35,7 +35,6 @@
 	)
 
 (use-package dape
-	:defer t
 	:custom
 	(dape-buffer-window-arrangement 'right)
 	(dape-request-timeout 60)
