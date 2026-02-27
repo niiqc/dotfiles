@@ -35,11 +35,11 @@
 	)
 
 (use-package dape
+	:defer t
 	:custom
 	(dape-buffer-window-arrangement 'right)
 	(dape-request-timeout 60)
-	:ensure t
-	)
+	:ensure t)
 
 (use-package flymake
 	:custom (flymake-fringe-indicator-position nil)
