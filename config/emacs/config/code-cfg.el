@@ -22,13 +22,16 @@
 		:args (list "format"
 								"--stdin-filename"
 								(or buffer-file-name "")
-								"-")))
+								"-"))
+	(reformatter-define rust-format
+		:program "rustfmt"
+		:args (list "--emit" "stdout")))
 
 (use-package mason
 	:config
 	(mason-ensure
 	 (lambda ()
-		 (dolist (pkg '("rassumfrassum" "zuban" "ruff" "vtsls" "biome" "html-lsp" "css-lsp"))
+		 (dolist (pkg '("rassumfrassum" "zuban" "ruff" "vtsls" "biome" "html-lsp" "css-lsp" "typos-lsp" "rust-analyzer"))
 			 (unless (mason-installed-p pkg)
 				 (ignore-errors (mason-install pkg))))))
 	:ensure t
@@ -199,6 +202,26 @@
 							(setq-local tab-width python-indent-offset)
 							(dtrt-indent-mode 0)
 							(dtrt-indent-mode t)))
+;; ======================================================================
+;; Rust
+;; ======================================================================
+(use-package eglot
+	:config (add-to-list 'eglot-server-programs
+											 '(rust-ts-mode . ("rass" "--" "rust-analyzer" "--" "typos-lsp")))
+	:ensure nil
+	:hook (rust-ts-mode . eglot-ensure))
+
+(add-hook 'rust-ts-mode-hook #'(lambda ()
+																 (setq-local indent-tabs-mode t
+																						 rust-ts-mode-indent-offset 2)
+																 (dtrt-indent-mode 0)
+																 (dtrt-indent-mode t)))
+
+(use-package rust-mode
+	:defer t
+	:mode ("\\.rs\\'")
+  :init
+  (setq rust-mode-treesitter-derive t))
 
 ;; ======================================================================
 ;; Fish
@@ -243,6 +266,7 @@
 ;; ======================================================================
 (use-package toml-ts
 	:ensure nil
-	:mode ("uv\\.lock" . toml-ts-mode))
+	:mode (("uv\\.lock" . toml-ts-mode)
+				 ("Cargo\\.lock" . toml-ts-mode)))
 
 (provide 'code-cfg)
