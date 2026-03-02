@@ -1,15 +1,4 @@
-;;; com-keybinds.el --- keyboard behavior	 -*- lexical-binding: t; -*-
-
-;; Copyright (C) 2025
-;; SPDX-License-Identifier: GPL-3.0-or-later
-
-;; Author: nick
-
-;;; Commentary:
-
-;; Define keybinds like vim
-
-;;; Code:
+;; -*- lexical-binding: t; -*-
 
 (use-package general
 	:ensure t)
@@ -83,4 +72,3 @@
 							standard-indent 2)
 
 (provide 'keybinds-cfg)
-;;; com-keybinds.el ends here

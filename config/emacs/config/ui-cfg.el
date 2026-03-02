@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package catppuccin-theme
 	:config
 	(catppuccin-set-color 'base   "#0e0e11")

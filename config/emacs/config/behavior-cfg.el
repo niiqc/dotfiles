@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Emacs auto-save
 (add-hook 'emacs-lisp-mode-hook
 					(lambda ()

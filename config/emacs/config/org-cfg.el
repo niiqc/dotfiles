@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; TODO: (Install org indent mode local plugin) - after install org-modern indent uncomment this lines
 (use-package org
 	:defer t

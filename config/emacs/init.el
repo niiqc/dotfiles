@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (add-to-list 'load-path (locate-user-emacs-file "config/"))
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
