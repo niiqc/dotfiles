@@ -217,12 +217,6 @@
 																 (dtrt-indent-mode 0)
 																 (dtrt-indent-mode t)))
 
-(use-package rust-mode
-	:defer t
-	:mode ("\\.rs\\'")
-  :init
-  (setq rust-mode-treesitter-derive t))
-
 ;; ======================================================================
 ;; Fish
 ;; ======================================================================
