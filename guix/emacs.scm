@@ -11,7 +11,7 @@
 						 )
 
 (define (base-pkgs)
-	(list git emacs nss-certs ripgrep)
+	(list git emacs-next nss-certs ripgrep)
 	)
 
 (define (guile-dev)
