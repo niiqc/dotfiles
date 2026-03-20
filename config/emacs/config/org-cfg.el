@@ -17,9 +17,9 @@
 											 (display-fill-column-indicator-mode 1)))
 	:config
 	(setq org-ellipsis												 "	 ⤵"
-				org-redisplay-inline-images					 t
-				org-display-inline-images						 t
-				org-startup-with-inline-images			 "inlineimages"
+				;; org-redisplay-inline-images					 t
+				;; org-display-inline-images						 t
+				;; org-startup-with-inline-images			 "inlineimages"
 				;; org-image-actual-width							 300
 				org-pretty-entities									 t
 				org-fontify-whole-heading-line			 t
