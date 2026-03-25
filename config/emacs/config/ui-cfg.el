@@ -149,6 +149,40 @@
   :config
   (eshell-starship-setup))
 
+(use-package indent-bars
+	:config (add-hook 'prog-mode-hook #'indent-bars-mode 1)
+	:custom
+	(indent-bars-treesit-support t)
+	(indent-bars-treesit-wrap '((python argument_list parameters
+																			list list_comprehension
+																			dictionary dictionary_comprehension
+																			parenthesized_expression subscript)
+															(toml table array comment)
+															(yaml block_mapping_pair comment)
+															(rust arguments parameters)
+															(c argument_list parameter_list init_declarator parenthesized_expression)))
+	(indent-bars-treesit-scope '((rust trait_item impl_item
+																		 macro_definition macro_invocation
+																		 struct_item enum_item mod_item
+																		 const_item let_declaration
+																		 function_item for_expression
+																		 if_expression loop_expression
+																		 while_expression match_expression
+																		 match_arm call_expression
+																		 token_tree token_tree_pattern
+																		 token_repetition)))
+	(indent-bars-treesit-ignore-blank-lines-types '("module"))
+	(indent-bars-color '(highlight :face-bg t :blend 0.15))
+	(indent-bars-pattern ".")
+	(indent-bars-width-frac 0.2)
+	(indent-bars-pad-frac 0.20)
+	(indent-bars-zigzag nil)
+	(indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1)) ; blend=1: blend with BG only
+	(indent-bars-highlight-current-depth '(:blend 0.5)) ; pump up the BG blend on current
+	(indent-bars-display-on-blank-lines t)
+	(indent-bars-starting-column 0)
+	:ensure t)
+
 ;; Configurations for graphic mode
 (when (display-graphic-p)
 	(set-face-attribute 'default nil
