@@ -58,7 +58,6 @@
  "C-j"		'windmove-down
  "C-k"		'windmove-up)
 
-;; TODO: Remove from keybinds
 (use-package dtrt-indent
 	:custom
 	(dtrt-indent-verbosity 0)
@@ -67,7 +66,6 @@
 	:hook (prog-mode . dtrt-indent-mode)
 	)
 
-;; TODO: Remove from keybinds and fix tabs
 (setq-default indent-tabs-mode t
 							standard-indent 2)
 

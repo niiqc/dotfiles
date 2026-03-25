@@ -8,17 +8,8 @@
 
 (use-package nerd-icons
 	:ensure t
-	;; :config
-	;; (add-to-list 'nerd-icons-extension-icon-alist
-	;; 						 '("gitignore" nerd-icons-faicon "nf-fa-book" :face nerd-icons-green)t)
-	;; (add-to-list 'nerd-icons-extension-icon-alist
-	;;  						 '(".gitignore" ned-icons-faicon "nf-fa-book" :face nerd-icons-green)t)
-	;; :config
-	;; (add-to-list 'nerd-icons-regexp-icon-alist '("^\\.gitignore" nerd-icons-sucicon "nf-seti-git" :face nerd-icons-lred))
-	;; (add-to-list 'nerd-icons-regexp-icon-alist '("^\\.editorconfig" nerd-icons-sucicon "nf-seti-editorconfig" :face nerd-icons-silver))
 	:custom
 	(nerd-icons-font-family "JetBrainsMono Nerd Font Mono"))
-
 
 (use-package solaire-mode
 	:defer t
@@ -74,9 +65,7 @@
 	(centaur-tabs-height 20)
 	(centaur-tabs-set-icons t)
 	(centaur-tabs-icon-type 'nerd-icons)
-	;; (centaur-tabs-cycle-scope 'tabs)
 	(centaur-tabs-show-new-tab-button nil)
-	;; (centaur-tabs-show-navigation-buttons t)
 	:hook ((dashboard-mode dired-mode) . centaur-tabs-local-mode))
 
 (use-package nerd-icons-dired

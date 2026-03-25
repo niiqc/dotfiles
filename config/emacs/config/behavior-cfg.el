@@ -46,7 +46,6 @@
 (setq mouse-wheel-progressive-speed nil)
 
 ;; Not create bkp/lockfiles
-;; TODO: Remove from behavior file
 (setq auto-save-default nil)
 (setq backup-inhibited t)
 (setq create-lockfiles nil)
@@ -57,7 +56,6 @@
 (setq echo-keystrokes 0)
 
 ;; Disable Tooltips
-;; TODO: Remove from behavior
 (setq x-gtk-use-system-tooltips nil)
 (setq use-system-tooltips nil)
 
@@ -159,20 +157,6 @@
 	(corfu-popupinfo-max-height 14)
 	(corfu-popupinfo-resize t)
 	(corfu-popupinfo-direction '(right vertical left)))
-
-;; TODO: Install local plugin - corfu terminal
-;; (use-package corfu-mouse
-;;	 :load-path "~/.config/emacs/emacs-local-plugins/corfu-terminal"
-;;	 :config
-;;	 (if (display-graphic-p)
-;;			 (corfu-mouse-mode 1)))
-
-;; (use-package corfu-terminal
-;;	 :load-path "~/.config/emacs/emacs-local-plugins/corfu-terminal"
-;;	 :config
-;;	 (unless (display-graphic-p)
-;;		 (corfu-terminal-mode +1)))
-
 
 (use-package emacs
 	:custom
