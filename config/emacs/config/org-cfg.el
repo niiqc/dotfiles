@@ -97,7 +97,6 @@
 	(unless (executable-find "mmdc")
 		(when (executable-find "npm")
 			(shell-command "npm install -g @mermaid-js/mermaid-cli")))
-	:defer t
 	:after org)
 
 
