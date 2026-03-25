@@ -75,6 +75,7 @@
 	)
 
 (use-package nerd-icons-completion
+	:ensure t
 	:demand t
 	:hook
 	(marginalia-mode . nerd-icons-completion-marginalia-setup)
