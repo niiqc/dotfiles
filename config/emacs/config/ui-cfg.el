@@ -61,7 +61,6 @@
 	(centaur-tabs-headline-match)
 	:custom
 	(centaur-tabs-style "bar")
-	(centaur-tabs-set-bar 'over)
 	(centaur-tabs-height 20)
 	(centaur-tabs-set-icons t)
 	(centaur-tabs-icon-type 'nerd-icons)
@@ -154,7 +153,7 @@
 (when (display-graphic-p)
 	(set-face-attribute 'default nil
 											:font "JetBrainsMono Nerd Font Mono"
-											:height 110))
+ 											:height 120))
 
 ;; Enable mouse on terminal
 (unless (display-graphic-p)
