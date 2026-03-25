@@ -3,8 +3,9 @@
 (use-package eglot
 	:ensure nil
 	:bind (("C-." . eglot-code-actions))
-	:custom (eglot-autoshutdown t)
-	)
+	:custom
+	(eglot-autoshutdown t)
+	(eglot-code-action-indications nil))
 
 (use-package reformatter
 	:defer t
