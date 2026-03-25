@@ -69,9 +69,6 @@
 (setq x-gtk-use-system-tooltips nil)
 (setq use-system-tooltips nil)
 
-;; Enable hs-minor-mode on prog mode
-(add-hook 'prog-mode-hook #'hs-minor-mode)
-
 ;; Add other files to identity a project
 (setq project-vc-extra-root-markers '(".dir-locals.el"))
 
@@ -307,6 +304,13 @@
 (use-package csv-mode
 	:defer t
 	:ensure t)
+
+(use-package outline-mode
+	:custom
+	(outline-minor-mode-use-buttons 'in-margins)
+	(outline-overlay-button-map nil)
+	:ensure nil
+	:hook (prog-mode . outline-minor-mode))
 
 (provide 'behavior-cfg)
 
