@@ -294,6 +294,7 @@
               ("C-c C-e" . markdown-do)))
 
 (use-package markdown-indent-mode
+	:ensure t
 	:hook ((markdown-mode . markdown-indent-mode)
 				 (gfm-mode . markdown-indent-mode)))
 
