@@ -149,6 +149,21 @@
   :config
   (eshell-starship-setup))
 
+;; Diff-hl
+(use-package diff-hl
+	:ensure t
+	:custom
+	(diff-hl-update-async t)
+	(vc-git-diff-switches '("--histogram"))
+	(diff-hl-flydiff-delay 0.5)
+	(diff-hl-show-staged-changes nil)
+	:config
+	(diff-hl-flydiff-mode)
+	:hook ((magit-post-refresh	. diff-hl-magit-post-refresh)
+				 (vc-checkin					. diff-hl-update)
+				 (dired-mode					. diff-hl-dired-mode))
+	:init (global-diff-hl-mode))
+
 (use-package indent-bars
 	:config (add-hook 'prog-mode-hook #'indent-bars-mode 1)
 	:custom
