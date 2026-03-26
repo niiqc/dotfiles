@@ -33,6 +33,8 @@
 ;; Fill all real char
 (setq x-stretch-cursor t)
 
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
 ;; ellipsis on truncated text
 ;; FIXME: Truncate ellipsis not working
 (with-eval-after-load 'mule-util
@@ -304,20 +306,6 @@
 (use-package csv-mode
 	:defer t
 	:ensure t)
-
-(use-package outline-mode
-	:custom
-	(outline-minor-mode-use-buttons 'in-margins)
-	(outline-overlay-button-map nil)
-	:init
-	(defun my/set-ellipsis (ellipsis)
-		(let* ((face-offset (* (face-id 'shadow) (lsh 1 22)))
-					 (value (vconcat (mapcar (lambda (c) (+ face-offset c)) ellipsis))))
-			(set-display-table-slot standard-display-table 'selective-display value)))
-
-	(my/set-ellipsis " ⤵")
-	:ensure nil
-	:hook (prog-mode . outline-minor-mode))
 
 (provide 'behavior-cfg)
 

@@ -13,7 +13,7 @@
 											 (setq-local fill-column 100)
 											 (display-fill-column-indicator-mode 1)))
 	:config
-	(setq org-ellipsis												 "	 ⤵"
+	(setq org-ellipsis												 " ⤵"
 				org-pretty-entities									 t
 				org-fontify-whole-heading-line			 t
 				org-fontify-done-headline						 t
@@ -99,5 +99,11 @@
 			(shell-command "npm install -g @mermaid-js/mermaid-cli")))
 	:after org)
 
+(use-package outline-mode
+	:custom
+	(outline-minor-mode-use-buttons 'in-margins)
+	(outline-overlay-button-map nil)
+	:ensure nil
+	:hook (org-mode . outline-minor-mode))
 
 (provide 'org-cfg)
