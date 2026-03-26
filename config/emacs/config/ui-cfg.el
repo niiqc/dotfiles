@@ -2,9 +2,12 @@
 
 (use-package catppuccin-theme
 	:config
+	(catppuccin-set-color 'base   "#0e0e11")
+	(catppuccin-set-color 'mantle "#0a0a0d")
+	(catppuccin-set-color 'crust  "#070709")
 	(load-theme 'catppuccin t)
 	:ensure t
-	:if (display-graphic-p))
+	)
 
 (use-package nerd-icons
 	:ensure t
