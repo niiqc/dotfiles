@@ -48,7 +48,6 @@
 	:ensure t)
 
 (use-package flymake
-	:custom	(flymake-margin-indicator-position nil)
 	:ensure nil)
 
 (use-package magit
