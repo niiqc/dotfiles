@@ -48,7 +48,7 @@
 	:ensure t)
 
 (use-package flymake
-	:custom (flymake-fringe-indicator-position nil)
+	:custom	(flymake-margin-indicator-position nil)
 	:ensure nil)
 
 (use-package magit
