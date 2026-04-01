@@ -88,20 +88,6 @@
 	(setq interprogram-paste-function 'wl-paste))
 
 ;; Evil configuration
-(defun vim-dec-inc-delta (delta)
-	(interactive "p")
-	(skip-chars-backward "0-9-")
-	(if (looking-at "-?[0-9]+")
-			(let* ((old (match-string 0))
-						 (new (number-to-string (+ (string-to-number old) delta))))
-				(replace-match new t) ;; substitui e move para depois do número
-				(backward-char 1)) ;; volta 1 caractere para ficar no último dígito
-		(error "No number at point")))
-
-(global-set-key (kbd "C-a") (lambda () (interactive) (vim-dec-inc-delta 1)))
-(global-set-key (kbd "C-S-x") (lambda () (interactive) (vim-dec-inc-delta -1)))
-
-;; Evil configuration
 (use-package evil
 	:init
 	(setq evil-want-keybinding nil)
