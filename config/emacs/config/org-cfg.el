@@ -8,7 +8,6 @@
 	(org-src-tab-acts-natively t)
 	(org-src-fontify-natively t)
 	:hook (org-mode .	 (lambda ()
-											 (visual-line-mode 1)
 											 (setq-local visual-line-move-text t)
 											 (setq-local fill-column 100)
 											 (display-fill-column-indicator-mode 1)))
