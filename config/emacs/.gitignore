@@ -15,6 +15,7 @@ history
 \#*#
 mason
 .org-id-locations
-bookmarks.eld
+*.eld
+*.elc
 projects
 org-roam.db
