@@ -59,7 +59,6 @@
 	("C-S-l" . centaur-tabs-forward)
 	:config
 	(centaur-tabs-mode t)
-	(centaur-tabs-headline-match)
   (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
 	:custom
 	(centaur-tabs-style "bar")
