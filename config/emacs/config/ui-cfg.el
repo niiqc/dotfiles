@@ -21,7 +21,6 @@
 ;; Dashboard configuration
 (use-package dashboard
 	:ensure t
-	:after general
 	:custom
 	(dashboard-banner-logo-title "Welcome back.")
 	(dashboard-image-banner-max-height 500)
