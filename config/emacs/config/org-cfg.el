@@ -78,10 +78,7 @@
 		(concat (read-directory-name "Directory: " default-directory)))
 	:custom
 	(org-dt-using-roam t)
-	(org-dt-capture-target "%(concat (my/ask-dir) \"/\" \"${slug}.org\")")
-  :vc (:url "https://codeberg.org/niqc/org-dynamic-templates.git"
-						:rev :newest
-            :branch "main"))
+	(org-dt-capture-target "%(concat (my/ask-dir) \"/\" \"${title}.org\")"))
 
 ;; Mermaid
 (use-package ob-mermaid
