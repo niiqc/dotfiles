@@ -87,44 +87,6 @@
 		(shell-command-to-string "wl-paste"))
 	(setq interprogram-paste-function 'wl-paste))
 
-;; Evil configuration
-(use-package evil
-	:init
-	(setq evil-want-keybinding nil)
-	(setq evil-want-integration t)
-	:ensure t
-	:config
-	(evil-mode 1)
-	:custom
-	(evil-want-C-u-scroll t)
-	(evil-kill-on-visual-paste nil))
-
-(use-package evil-collection
-	:ensure t
-	:after evil
-	:config
-	(evil-collection-init))
-
-(use-package evil-goggles
-	:after evil
-	:ensure t
-	:custom
-	(evil-goggles-use-diff-faces)
-	:config
-	(evil-goggles-mode))
-
-(use-package evil-nerd-commenter
-	:ensure t
-	:config
-	(evilnc-default-hotkeys))
-
-(use-package evil-terminal-cursor-changer
-	:ensure t
-	:unless (display-graphic-p)
-	:after evil
-	:config
-	(evil-terminal-cursor-changer-activate))
-
 (use-package corfu
 	:ensure t
 	:init (global-corfu-mode)

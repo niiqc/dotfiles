@@ -23,15 +23,6 @@
 	 'org-babel-load-languages
 	 '((mermaid . t))))
 
-(use-package evil-org
-	:defer t
-	:ensure t
-	:after org
-	:hook (org-mode . evil-org-mode)
-	:config
-	(require 'evil-org-agenda)
-	(evil-org-agenda-set-keys))
-
 ;; Roam
 (use-package websocket
 	:ensure t

@@ -8,8 +8,15 @@
 (define-key my/window-map (kbd "v") #'split-window-right)
 (define-key my/window-map (kbd "d") #'delete-window)
 
-(windmove-default-keybindings 'control)
+(global-set-key (kbd "<next>") (lambda () (interactive) (vertical-motion 20)))
+(global-set-key (kbd "<prior>") (lambda () (interactive) (vertical-motion -20)))
 
+(global-set-key (kbd "C-<next>") (lambda () (interactive) (scroll-up-command)))
+(global-set-key (kbd "C-<prior>") (lambda () (interactive) (scroll-down-command)))
+
+(global-set-key (kbd "C-_") 'undo-only)
+
+(windmove-default-keybindings 'control)
 (global-set-key [remap list-buffers] 'ibuffer)
 
 (use-package dtrt-indent
@@ -17,8 +24,17 @@
 	(dtrt-indent-verbosity 0)
 	(dtrt-indent-run-after-smie t)
 	:ensure t
-	:hook (prog-mode . dtrt-indent-mode)
-	)
+	:hook (prog-mode . dtrt-indent-mode))
+
+(use-package multiple-cursors
+	:bind
+	("C->"			. mc/mark-next-like-this)
+	("C-<"			. mc/mark-previous-like-this)
+	("C-c C-<"	. mc/mark-all-like-this)
+	("C-\""			. mc/skip-to-next-like-this)
+	("C-:"			. mc/skip-to-previous-like-this)
+	:defer t
+	:ensure t)
 
 (setq-default indent-tabs-mode t
 							standard-indent 2)
