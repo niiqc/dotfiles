@@ -16,8 +16,11 @@
 
 (global-set-key (kbd "C-_") 'undo-only)
 
+(global-set-key (kbd "C-,") 'my/duplicate-line)
+
 (windmove-default-keybindings 'control)
 (global-set-key [remap list-buffers] 'ibuffer)
+(global-set-key [remap project-list-buffers] 'my/project-ibuffer)
 
 (use-package dtrt-indent
 	:custom

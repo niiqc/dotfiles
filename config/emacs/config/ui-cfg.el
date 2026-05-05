@@ -48,38 +48,11 @@
 	:ensure t
 	:hook (after-init . doom-modeline-mode))
 
-;; Centaur tabs
-(use-package centaur-tabs
-	:defer t
-	:ensure t
-	:demand
-	:bind
-	("C-S-h" . centaur-tabs-backward)
-	("C-S-l" . centaur-tabs-forward)
-	:config
-	(centaur-tabs-mode t)
-  (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
-	:custom
-	(centaur-tabs-style "bar")
-  (centaur-tabs-set-bar 'under)
-  (centaur-tabs-set-modified-marker t)
-	(x-underline-at-descent-line t)
-	(centaur-tabs-height 28)
-  (centaur-tabs-set-icons t)
-  (uniquify-separator "/")
-  (uniquify-buffer-name-style 'forward)
-  (centaur-tabs-show-count nil)
-	(centaur-tabs-label-fixed-length 8)
-	(centaur-tabs-icon-type 'nerd-icons)
-	(centaur-tabs-show-new-tab-button nil)
-	:hook ((dashboard-mode dired-mode) . centaur-tabs-local-mode))
-
 (use-package nerd-icons-dired
 	:defer t
 	:commands (nerd-icons-dired-mode)
 	:ensure t
-	:hook (dired-mode . nerd-icons-dired-mode)
-	)
+	:hook (dired-mode . nerd-icons-dired-mode))
 
 (use-package nerd-icons-completion
 	:ensure t
@@ -87,6 +60,10 @@
 	:hook
 	(marginalia-mode . nerd-icons-completion-marginalia-setup)
 	(after-init . nerd-icons-completion-mode))
+
+(use-package nerd-icons-ibuffer
+	:ensure t
+	:hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 (use-package whitespace
 	:defer t
