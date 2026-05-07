@@ -2,33 +2,11 @@
 
 (use-package eglot
 	:ensure nil
-	:bind (("C-." . eglot-code-actions))
+	:bind (("C-." . eglot-code-actions)
+				 (:map eglot-mode-map ("C-c e f" . eglot-format-buffer)))
 	:custom
 	(eglot-autoshutdown t)
 	(eglot-code-action-indications nil))
-
-(use-package reformatter
-	:defer t
-	:ensure t
-	:hook (python-mode . ruff-format-on-save-mode)
-	:hook (python-ts-mode . ruff-format-on-save-mode)
-	:hook (tsx-ts-mode . biome-format-on-save-mode)
-	:hook (typescript-ts-mode . biome-format-on-save-mode)
-	:config
-	(reformatter-define biome-format
-		:program "biome"
-		:args (list "format"
-								"--stdin-file-path"
-								(or buffer-file-name "-")))
-	(reformatter-define ruff-format
-		:program "ruff"
-		:args (list "format"
-								"--stdin-filename"
-								(or buffer-file-name "")
-								"-"))
-	(reformatter-define rust-format
-		:program "rustfmt"
-		:args (list "--emit" "stdout")))
 
 (use-package mason
 	:config
