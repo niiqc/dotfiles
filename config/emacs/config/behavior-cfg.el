@@ -110,6 +110,23 @@
     (move-beginning-of-line 1)
     (forward-char column)))
 
+;; Function to expand region from cursor
+(defun my/expand-region (&optional fchar echar)
+  (interactive)
+  (let* ((fchar (or fchar (char-to-string (read-char "start char: "))))
+         (echar (or echar (char-to-string (read-char "end char: "))))
+         (origin (point)))
+    (if (and (search-backward fchar nil t)
+             (progn
+               (goto-char (+ (point) (length fchar)))
+               (set-mark (point))
+               (goto-char origin)
+               (search-forward echar nil t)))
+        (goto-char (- (point) (length echar)))
+      (deactivate-mark)
+      (goto-char origin)
+      (message "Could not find delimiters"))))
+
 ;; Make clipboard works on wayland terminal
 (when (executable-find "wl-copy")
 	(defun wl-copy (text)

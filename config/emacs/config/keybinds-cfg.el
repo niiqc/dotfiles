@@ -18,6 +18,8 @@
 
 (global-set-key (kbd "C-,") 'my/duplicate-line)
 
+(global-set-key (kbd "C-c s") 'my/expand-region)
+
 (windmove-default-keybindings 'control)
 (global-set-key [remap list-buffers] 'ibuffer)
 (global-set-key [remap project-list-buffers] 'my/project-ibuffer)
