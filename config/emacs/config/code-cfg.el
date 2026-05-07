@@ -87,45 +87,6 @@
 				"biome" "lsp-proxy"
 				"--"
 				"vscode-html-language-server" "--stdio")))
-
-	(defun my/html-edit-indirect (beg end mode ext)
-		(edit-indirect-region beg end t)
-		(with-current-buffer (current-buffer)
-			(setq buffer-file-name
-						(format "%s.-ei-.%s"
-										(buffer-file-name (buffer-base-buffer))
-										ext))
-			(funcall mode)))
-
-	(defun my/html-edit-style ()
-		(interactive)
-		(save-excursion
-			(when (search-backward "<style" nil t)
-				(search-forward ">")
-				(let ((beg (point)))
-					(when (search-forward "</style>" nil t)
-						(my/html-edit-indirect
-						 beg
-						 (match-beginning 0)
-						 #'css-ts-mode
-						 "css"))))))
-
-	(defun my/html-edit-script ()
-		(interactive)
-		(save-excursion
-			(when (search-backward "<script" nil t)
-				(search-forward ">")
-				(let ((beg (point)))
-					(when (search-forward "</script>" nil t)
-						(my/html-edit-indirect
-						 beg
-						 (match-beginning 0)
-						 #'js-ts-mode
-						 "js"))))))
-
-	(with-eval-after-load 'web-mode
-		(keymap-set web-mode-map "C-c '" #'my/html-edit-script)
-		(keymap-set web-mode-map "C-c \\" #'my/html-edit-style))
 	:hook (web-mode . eglot-ensure))
 
 (use-package eglot
