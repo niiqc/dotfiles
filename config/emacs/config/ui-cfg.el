@@ -119,7 +119,7 @@
 	:init (global-diff-hl-mode))
 
 (use-package indent-bars
-	:config (add-hook 'prog-mode-hook #'indent-bars-mode 1)
+	:hook (prog-mode . (lambda () (indent-bars-mode 1)))
 	:custom
 	(indent-bars-treesit-support t)
 	(indent-bars-treesit-wrap '((python argument_list parameters
@@ -143,12 +143,12 @@
 	(indent-bars-treesit-ignore-blank-lines-types '("module"))
 	(indent-bars-color '(highlight :face-bg t :blend 0.15))
 	(indent-bars-pattern ".")
-	(indent-bars-width-frac 0.2)
-	(indent-bars-pad-frac 0.20)
+	(indent-bars-width-frac 0.1)
+	(indent-bars-pad-frac 0.1)
 	(indent-bars-zigzag nil)
 	(indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1)) ; blend=1: blend with BG only
 	(indent-bars-highlight-current-depth '(:blend 0.5)) ; pump up the BG blend on current
-	(indent-bars-display-on-blank-lines 'least)
+	(indent-bars-display-on-blank-lines t)
 	(indent-bars-starting-column 0)
 	:ensure t)
 
