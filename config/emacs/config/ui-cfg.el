@@ -49,7 +49,7 @@
 				 ))
 			)))
 	(dashboard-banner-logo-title "Welcome to Emacs!")
-	(dashboard-startup-banner (expand-file-name "banner.txt" user-emacs-directory))
+	(dashboard-startup-banner (locate-user-emacs-file "banner.txt"))
 	(dashboard-icon-type 'nerd-icons)
 	(dashboard-navigation-cycle t)
 	(dashboard-set-heading-icons t)
