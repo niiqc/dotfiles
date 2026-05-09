@@ -1,17 +1,17 @@
 ;; -*- lexical-binding: t; -*-
 
 (use-package ef-themes
-  :ensure t
-  :init
-  (ef-themes-take-over-modus-themes-mode 1)
-  :bind
-  (("<f5>" . modus-themes-rotate)
-   ("C-<f5>" . modus-themes-select)
-   ("M-<f5>" . modus-themes-load-random))
-  :config
-  (setq modus-themes-mixed-fonts t)
-  (setq modus-themes-italic-constructs t)
-  (modus-themes-load-theme 'ef-night))
+	:ensure t
+	:init
+	(ef-themes-take-over-modus-themes-mode 1)
+	:bind
+	(("<f5>" . modus-themes-rotate)
+	 ("C-<f5>" . modus-themes-select)
+	 ("M-<f5>" . modus-themes-load-random))
+	:config
+	(setq modus-themes-mixed-fonts t)
+	(setq modus-themes-italic-constructs t)
+	(modus-themes-load-theme 'ef-night))
 
 (use-package nerd-icons
 	:ensure t
@@ -34,11 +34,11 @@
 															 dashboard-insert-newline
 															 dashboard-insert-footer))
 	(dashboard-navigator-buttons
-   `(
+	 `(
 		 ((,(nerd-icons-devicon "nf-dev-git" :height 1.1 :v-adjust 0.0)
-       ""
-       "Browse homepage"
-       (lambda (&rest _) (browse-url "https://codeberg.org/niqc")))
+			 ""
+			 "Browse homepage"
+			 (lambda (&rest _) (browse-url "https://codeberg.org/niqc")))
 			(,(nerd-icons-mdicon "nf-md-refresh" :height 1.1 :v-adjust 0.0)
 			 ""
 			 "Clear zombie items from recents and projects"
@@ -56,8 +56,8 @@
 	(dashboard-set-file-icons t)
 	(dashboard-vertically-center-content t)
 	(dashboard-center-content t)
-	(dashboard-items '((recents   . 5)
-										 (projects  . 5)))
+	(dashboard-items '((recents		. 5)
+										 (projects	. 5)))
 	:init
 	(dashboard-setup-startup-hook))
 
@@ -100,8 +100,8 @@
 (use-package eshell-starship
 	:vc (:url "https://github.com/siddharthverma314/eshell-starship.git"
 						:branch "main")
-  :config
-  (eshell-starship-setup))
+	:config
+	(eshell-starship-setup))
 
 ;; Diff-hl
 (use-package diff-hl
@@ -156,7 +156,7 @@
 (when (display-graphic-p)
 	(set-face-attribute 'default nil
 											:font "JetBrainsMono Nerd Font Mono"
- 											:height 120))
+											:height 120))
 
 ;; Enable mouse on terminal
 (unless (display-graphic-p)

@@ -76,11 +76,11 @@
 
 ;; Configure ibuffer groups to improve the navigation
 (defun my/project-ibuffer ()
-  "Ibuffer filtered by project."
-  (interactive)
-  (if-let ((pr (project-current)))
-      (project-list-buffers-ibuffer pr)
-    (error "First open a project!")))
+	"Ibuffer filtered by project."
+	(interactive)
+	(if-let ((pr (project-current)))
+			(project-list-buffers-ibuffer pr)
+		(error "First open a project!")))
 
 (setq ibuffer-saved-filter-groups
 			'(("my/custom-default"
@@ -99,33 +99,33 @@
 
 ;; Duplicate current line, at same point
 (defun my/duplicate-line ()
-  "Duplicate current line"
-  (interactive)
-  (let ((column (- (point) (point-at-bol)))
-        (line (let ((s (thing-at-point 'line t)))
-                (if s (string-remove-suffix "\n" s) ""))))
-    (move-end-of-line 1)
-    (newline)
-    (insert line)
-    (move-beginning-of-line 1)
-    (forward-char column)))
+	"Duplicate current line"
+	(interactive)
+	(let ((column (- (point) (point-at-bol)))
+				(line (let ((s (thing-at-point 'line t)))
+								(if s (string-remove-suffix "\n" s) ""))))
+		(move-end-of-line 1)
+		(newline)
+		(insert line)
+		(move-beginning-of-line 1)
+		(forward-char column)))
 
 ;; Function to expand region from cursor
 (defun my/expand-region (&optional fchar echar)
-  (interactive)
-  (let* ((fchar (or fchar (char-to-string (read-char "start char: "))))
-         (echar (or echar (char-to-string (read-char "end char: "))))
-         (origin (point)))
-    (if (and (search-backward fchar nil t)
-             (progn
-               (goto-char (+ (point) (length fchar)))
-               (set-mark (point))
-               (goto-char origin)
-               (search-forward echar nil t)))
-        (goto-char (- (point) (length echar)))
-      (deactivate-mark)
-      (goto-char origin)
-      (message "Could not find delimiters"))))
+	(interactive)
+	(let* ((fchar (or fchar (char-to-string (read-char "start char: "))))
+				 (echar (or echar (char-to-string (read-char "end char: "))))
+				 (origin (point)))
+		(if (and (search-backward fchar nil t)
+						 (progn
+							 (goto-char (+ (point) (length fchar)))
+							 (set-mark (point))
+							 (goto-char origin)
+							 (search-forward echar nil t)))
+				(goto-char (- (point) (length echar)))
+			(deactivate-mark)
+			(goto-char origin)
+			(message "Could not find delimiters"))))
 
 ;; Make clipboard works on wayland terminal
 (when (executable-find "wl-copy")
@@ -182,7 +182,7 @@
 	:config (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
 	:custom
 	(completion-category-overrides '((eglot (styles orderless))
-                                   (eglot-capf (styles orderless))))
+																	 (eglot-capf (styles orderless))))
 	:hook (eglot-managed-mode . my/eglot-capf)
 	:init
 	;; Add `completion-at-point-functions', used by `completion-at-point'.

@@ -38,21 +38,21 @@
 ;; Javascript
 ;; ======================================================================
 (use-package eglot
-  :ensure nil
-  :config
-  (add-to-list
-   'eglot-server-programs
-   '(((typescript-ts-mode :language-id "typescript")
-      (js-ts-mode :language-id "javascript")
-      (tsx-ts-mode :language-id "typescriptreact"))
-     . ("rass"
-        "--"
-        "vtsls" "--stdio"
-        "--"
-        "biome" "lsp-proxy"
+	:ensure nil
+	:config
+	(add-to-list
+	 'eglot-server-programs
+	 '(((typescript-ts-mode :language-id "typescript")
+			(js-ts-mode :language-id "javascript")
+			(tsx-ts-mode :language-id "typescriptreact"))
+		 . ("rass"
+				"--"
+				"vtsls" "--stdio"
+				"--"
+				"biome" "lsp-proxy"
 				"--"
 				"tailwindcss-language-server" "--stdio")))
-  :hook ((tsx-ts-mode js-ts-mode typescript-ts-mode) . eglot-ensure))
+	:hook ((tsx-ts-mode js-ts-mode typescript-ts-mode) . eglot-ensure))
 
 (use-package tsx-ts-mode
 	:mode ("\\.tsx\\'"))
@@ -199,23 +199,23 @@
 	:after markdown-mode)
 
 (use-package markdown-mode
-  :ensure t
+	:ensure t
 	:custom
 	(markdown-fontify-code-blocks-natively t)
 	(markdown-enable-wiki-links t)
-  (markdown-italic-underscore t)
-  (markdown-asymmetric-header t)
-  (markdown-make-gfm-checkboxes-buttons t)
-  (markdown-gfm-uppercase-checkbox t)
-  (markdown-enable-math t)
-  (markdown-content-type "application/xhtml+xml")
-  :init
+	(markdown-italic-underscore t)
+	(markdown-asymmetric-header t)
+	(markdown-make-gfm-checkboxes-buttons t)
+	(markdown-gfm-uppercase-checkbox t)
+	(markdown-enable-math t)
+	(markdown-content-type "application/xhtml+xml")
+	:init
 	(delete 'markdown treesit-auto-langs)
 	(add-to-list 'auto-mode-alist
 							 '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
 	(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
-  :bind (:map markdown-mode-map
-              ("C-c C-e" . markdown-do)))
+	:bind (:map markdown-mode-map
+							("C-c C-e" . markdown-do)))
 
 (use-package markdown-indent-mode
 	:ensure t

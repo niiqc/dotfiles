@@ -12,13 +12,12 @@
 											 (setq-local fill-column 100)
 											 (display-fill-column-indicator-mode 1)))
 	:config
-	(setq org-ellipsis												 " ⤵"
-				org-pretty-entities									 t
-				org-fontify-whole-heading-line			 t
-				org-fontify-done-headline						 t
-				org-fontify-quote-and-verse-blocks	 t
-				org-src-preserve-indentation				 t
-				)
+	(setq org-ellipsis " ⤵"
+				org-pretty-entities	t
+				org-fontify-whole-heading-line t
+				org-fontify-done-headline t
+				org-fontify-quote-and-verse-blocks t
+				org-src-preserve-indentation t)
 	(org-babel-do-load-languages
 	 'org-babel-load-languages
 	 '((mermaid . t))))
@@ -30,12 +29,12 @@
 
 (use-package org-roam-ui
 	:ensure t
-  :after org-roam
-  :config
-  (setq org-roam-ui-sync-theme t
-        org-roam-ui-follow t
-        org-roam-ui-update-on-save t
-        org-roam-ui-open-on-start t))
+	:after org-roam
+	:config
+	(setq org-roam-ui-sync-theme t
+				org-roam-ui-follow t
+				org-roam-ui-update-on-save t
+				org-roam-ui-open-on-start t))
 
 (use-package org-roam
 	:defer t
@@ -75,7 +74,7 @@
 (use-package ob-mermaid
 	:ensure t
 	:init
-  (add-to-list 'org-src-lang-modes '("mermaid" . mermaid))
+	(add-to-list 'org-src-lang-modes '("mermaid" . mermaid))
 
 	(defun org/update-mmdc ()
 		(interactive)
