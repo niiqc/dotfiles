@@ -10,14 +10,15 @@
 
 (use-package mason
 	:config
+	(mason-setup)
 	(defun my/mason-setup ()
 		"Install all LSP's/linters based on a list preset"
 		(interactive)
-		(mason-setup
-			(lambda ()
-				(dolist (pkg '("rassumfrassum" "zuban" "ruff" "vtsls" "biome" "html-lsp" "css-lsp" "typos-lsp" "rust-analyzer"))
-					(unless (mason-installed-p pkg)
-						(ignore-errors (mason-install pkg)))))))
+		(mason-ensure
+		 (lambda ()
+			         (dolist (pkg '("rassumfrassum" "zuban" "ruff" "vtsls" "biome" "html-lsp" "css-lsp" "typos-lsp" "rust-analyzer"))
+				(unless (mason-installed-p pkg)
+					(ignore-errors (mason-install pkg)))))))
 	:ensure t)
 
 (use-package dape
