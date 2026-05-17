@@ -238,23 +238,6 @@
 	:defer t
 	:ensure t)
 
-(use-package embark
-	:ensure t
-	:init
-	(setq prefix-help-command #'embark-prefix-help-command)
-	:config
-	(add-to-list 'display-buffer-alist
-							 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-								 nil
-								 (window-parameters (mode-line-format . none)))))
-
-;; Consult users will also want the embark-consult package.
-(use-package embark-consult
-	:defer t
-	:ensure t
-	:hook
-	(embark-collect-mode . consult-preview-at-point-mode))
-
 (use-package gt
 	:bind (("C-x C-t " . gt-setup))
 	:defer t
