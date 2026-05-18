@@ -185,11 +185,9 @@
 																	 (eglot-capf (styles orderless))))
 	:hook (eglot-managed-mode . my/eglot-capf)
 	:init
-	;; Add `completion-at-point-functions', used by `completion-at-point'.
-	(setq-default completion-at-point-functions
-								(append (default-value 'completion-at-point-functions)
-												(list #'cape-dabbrev #'cape-file #'cape-abbrev #'cape-tex #'cape-dict #'cape-elisp-block
-															#'cape-elisp-symbol #'cape-keyword #'cape-history))))
+	(add-to-list 'completion-at-point-functions #'cape-dabbrev)
+	(add-to-list 'completion-at-point-functions #'cape-file)
+	(add-to-list 'completion-at-point-functions #'cape-keyword))
 
 ;; Enable Vertico.
 (use-package vertico
