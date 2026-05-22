@@ -1,11 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-;; Emacs auto-save
-(add-hook 'emacs-lisp-mode-hook
-					(lambda ()
-						(add-hook 'before-save-hook (lambda () (indent-region (point-min) (point-max))) nil t)
-						))
-
 ;; use editorconfig from project
 (editorconfig-mode t)
 
