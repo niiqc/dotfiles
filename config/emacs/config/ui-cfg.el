@@ -97,12 +97,6 @@
 																 )
 															 ))
 
-(use-package eshell-starship
-	:vc (:url "https://github.com/siddharthverma314/eshell-starship.git"
-						:branch "main")
-	:config
-	(eshell-starship-setup))
-
 ;; Diff-hl
 (use-package diff-hl
 	:ensure t

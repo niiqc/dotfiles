@@ -162,11 +162,11 @@
 							(list (cape-capf-super
 										 #'eglot-completion-at-point
 										 #'cape-dabbrev
-										 #'cape-file
 										 #'cape-keyword
 										 ))))
 
 (use-package cape
+	:bind("C-c p" . cape-prefix-map)
 	:ensure t
 	:config (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
 	:custom
@@ -174,9 +174,9 @@
 																	 (eglot-capf (styles orderless))))
 	:hook (eglot-managed-mode . my/eglot-capf)
 	:init
-	(add-to-list 'completion-at-point-functions #'cape-dabbrev)
-	(add-to-list 'completion-at-point-functions #'cape-file)
-	(add-to-list 'completion-at-point-functions #'cape-keyword))
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block))
 
 ;; Enable Vertico.
 (use-package vertico
