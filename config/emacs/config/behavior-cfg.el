@@ -157,11 +157,6 @@
 	(window-sides-vertical t)
 	)
 
-(use-package nerd-icons-corfu
-	:after corfu
-	:config (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
-	:ensure t)
-
 (defun my/eglot-capf ()
 	(setq-local completion-at-point-functions
 							(list (cape-capf-super
