@@ -292,6 +292,19 @@
 	:ensure t
 	)
 
+(use-package elec-pair
+	:config (electric-pair-mode t)
+	:ensure nil)
+
+(use-package move-text
+	:bind
+	("M-<up>" . move-text-up)
+	("M-p" . move-text-up)
+	("M-<down>" . move-text-down)
+	("M-n" . move-text-down)
+	:defer t
+	:ensure t)
+
 (use-package csv-mode
 	:defer t
 	:ensure t)
