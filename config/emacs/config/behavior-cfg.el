@@ -227,11 +227,29 @@
 	:ensure t)
 
 (use-package gt
-	:bind (("C-x C-t " . gt-setup))
+	:bind (("C-c t c" . gt-setup)
+				 ("C-c t s" . gt-switch-translator)
+				 ("C-c t t" . gt-translate))
 	:defer t
 	:ensure t
 	:config
-	(setq gt-default-translator (gt-translator :engines (gt-google-engine)))
+ 	;; Temporary solve vertico error on emacs 31
+	;; PR is open remove this when pr is merged
+	;; https://github.com/lorniu/gt.el/pull/109
+	(defun my/gt-fix-category (orig &rest args)
+		(let ((res (apply orig args)))
+			(lambda (input pred action)
+				(if (eq action 'metadata)
+						'(metadata (category . gt))
+					(funcall res input pred action)))))
+
+	(advice-add 'gt-make-completion-table :around #'my/gt-fix-category)
+
+	(setq gt-default-translator
+				(gt-translator :engines (gt-google-engine)
+											 :taker (gt-taker :langs '(en pt) :text 'word)
+											 :render (gt-buffer-render)))
+
 	(setq gt-preset-translators
 				`((en-pt . ,(gt-translator
 										 :taker (gt-taker :langs '(en pt) :text 'word)
@@ -241,8 +259,7 @@
 											:taker (gt-taker :langs '(pt en) :text 'word)
 											:engines (gt-google-engine)
 											:render (gt-buffer-render)
-											))
-					)))
+											)))))
 
 (use-package treesit-auto
 	:config
