@@ -222,6 +222,7 @@
 	(add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
 (use-package consult
+ 	:bind (("C-c F" . consult-ripgrep))
 	:defer t
 	:ensure t)
 
