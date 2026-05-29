@@ -67,7 +67,10 @@
 	(doom-modeline-indent-info t)
 	(doom-modeline-height 25)
 	(auto-revert-check-vc-info t)
+	(doom-modeline-vcs-max-length 25)
+	(doom-modeline-major-mode-icon nil)
 	(doom-modeline-bar-width 4)
+	(doom-modeline-buffer-file-name-style 'file-name-with-project)
 	:ensure t
 	:hook (after-init . doom-modeline-mode))
 
@@ -144,6 +147,13 @@
 	(indent-bars-highlight-current-depth '(:blend 0.5)) ; pump up the BG blend on current
 	(indent-bars-display-on-blank-lines t)
 	(indent-bars-starting-column 0)
+	:ensure t)
+
+(use-package breadcrumb
+	:config (breadcrumb-mode t)
+	:custom
+	(breadcrumb-imenu-crumb-separator " > ")
+	(breadcrumb-project-crumb-separator " > ")
 	:ensure t)
 
 ;; Configurations for graphic mode
