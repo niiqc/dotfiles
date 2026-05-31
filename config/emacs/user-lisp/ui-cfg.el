@@ -162,10 +162,6 @@
 											:font "JetBrainsMono Nerd Font Mono"
 											:height 120))
 
-;; Enable mouse on terminal
-(unless (display-graphic-p)
-	(xterm-mouse-mode t))
-
 ;; Resizing a frame rounds its sizes to the frame's
 (setq frame-resize-pixelwise t)
 

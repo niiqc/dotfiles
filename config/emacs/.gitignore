@@ -20,3 +20,4 @@ mason
 projects
 org-roam.db
 .mc-lists.el
+.user-lisp-autoloads.el
