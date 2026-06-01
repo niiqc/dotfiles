@@ -70,7 +70,7 @@
 	(doom-modeline-vcs-max-length 25)
 	(doom-modeline-major-mode-icon nil)
 	(doom-modeline-bar-width 4)
-	(doom-modeline-buffer-file-name-style 'file-name-with-project)
+	(doom-modeline-buffer-file-name-style 'project)
 	:ensure t
 	:hook (after-init . doom-modeline-mode))
 
