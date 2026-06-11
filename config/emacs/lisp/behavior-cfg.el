@@ -68,29 +68,6 @@
 ;; Add other files to identity a project
 (setq project-vc-extra-root-markers '(".dir-locals.el"))
 
-;; Configure ibuffer groups to improve the navigation
-(defun my/project-ibuffer ()
-	"Ibuffer filtered by project."
-	(interactive)
-	(if-let ((pr (project-current)))
-			(project-list-buffers-ibuffer pr)
-		(error "First open a project!")))
-
-(setq ibuffer-saved-filter-groups
-			'(("my/custom-default"
-				 ("prog-mode" (or (derived-mode . prog-mode)))
-				 ("markup" (or (mode . org-mode)
-											 (derived-mode . markdown-mode)))
-				 ("shell" (or (mode . eshell-mode)))
-				 ("directories" (mode . dired-mode))
-				 ("git" (name . "magit"))
-				 ("others" (name . "^\\*.*\\*$")))))
-
-(setq ibuffer-show-empty-filter-groups nil)
-
-(add-hook 'ibuffer-mode-hook
-					(lambda () (ibuffer-switch-to-saved-filter-groups "my/custom-default")))
-
 ;; Duplicate current line, at same point
 (defun my/duplicate-line ()
 	"Duplicate current line"

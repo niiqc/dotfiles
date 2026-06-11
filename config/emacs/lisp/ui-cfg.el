@@ -87,6 +87,29 @@
 	(marginalia-mode . nerd-icons-completion-marginalia-setup)
 	(after-init . nerd-icons-completion-mode))
 
+(use-package ibuffer
+	:ensure nil
+	:defer t
+	:config
+	:bind
+	(:map ibuffer-name-map
+				("<mouse-1>" . ibuffer-visit-buffer))
+	:custom
+	(ibuffer-saved-filter-groups
+	 '(("my/custom-default"
+			("Code" (derived-mode . prog-mode))
+			("Conf" (derived-mode . conf-mode))
+			("Markup" (or (mode . org-mode)
+										(derived-mode . markdown-mode)))
+			("Shell" (mode . eshell-mode))
+			("Directories" (mode . dired-mode))
+			("Git" (or (derived-mode . magit-mode)
+								 (mode . vc-compilation-mode))))))
+	(ibuffer-show-empty-filter-groups nil)
+	:hook
+	(ibuffer-mode . (lambda ()
+										(ibuffer-switch-to-saved-filter-groups "my/custom-default"))))
+
 (use-package nerd-icons-ibuffer
 	:ensure t
 	:hook (ibuffer-mode . nerd-icons-ibuffer-mode))
