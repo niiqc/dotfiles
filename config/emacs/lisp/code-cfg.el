@@ -5,8 +5,11 @@
 	:bind (("C-." . eglot-code-actions)
 				 (:map eglot-mode-map ("C-c e f" . eglot-format-buffer)))
 	:custom
+	(eglot-ignored-server-capabilities '(:inlayHintProvider))
 	(eglot-autoshutdown t)
-	(eglot-code-action-indications nil))
+	(eglot-code-action-indications nil)
+	(eldoc-echo-area-use-multiline-p nil)
+	(eldoc-display-functions '(eldoc-display-in-buffer)))
 
 (use-package mason
 	:config
