@@ -1,72 +1,64 @@
 ;; -*- lexical-binding: t; -*-
 
+;; Not create bkp/lockfiles
+(setopt auto-save-default nil
+				create-lockfiles nil
+				make-backup-files nil
+				auto-save-visited-interval 1
+
+				;; Remove save message
+				save-silently t
+
+				;; Remove two spaces from end of sentence
+				sentence-end-double-space nil
+
+				;; Show cursor only on focus
+				cursor-in-non-selected-windows nil
+
+				;; Scroll step
+				scroll-step 1
+				scroll-conservatively 10000
+				mouse-wheel-scroll-amount '(3 ((shift) . hscroll) ((meta)) ((control meta) . global-text-scale)
+																			((control) . text-scale))
+
+				mouse-wheel-progressive-speed nil
+
+				;; Remove subtitle legend on press one key
+				echo-keystrokes 0
+
+				;; Disable Tooltips
+				x-gtk-use-system-tooltips nil
+				use-system-tooltips nil
+
+				;; Add other files to identity a project
+				project-vc-extra-root-markers '(".dir-locals.el")
+
+				;; Move to trash
+				delete-by-moving-to-trash t
+
+				;; Increase undo limit
+				undo-limit 100000000
+
+				;; Take new window space from all other windows
+				window-combination-resize t
+
+				;; Fill all real char
+				x-stretch-cursor t)
+
 ;; use editorconfig from project
 (editorconfig-mode t)
 
 ;; Remove white space from end of file
 (add-hook 'before-save-hook #'whitespace-cleanup)
 
-;; Show cursor only on focus
-(setq-default cursor-in-non-selected-windows nil)
-
-;; Remove two spaces from end of sentence
-(setq-default sentence-end-double-space nil)
-
-(global-subword-mode 1)
-
-;; Move to trash
-(setq delete-by-moving-to-trash t)
-
-;; Increase undo limit
-(setq undo-limit 100000000
-			auto-save-default t)
-
-;; Take new window space from all other windows
-(setq window-combination-resize t)
-
-;; Fill all real char
-(setq x-stretch-cursor t)
-
-(add-hook 'prog-mode-hook #'hs-minor-mode)
-
-;; ellipsis on truncated text
-;; FIXME: Truncate ellipsis not working
-(with-eval-after-load 'mule-util
-	(setq truncate-string-ellipsis " ⤵"))
-
-;; Scroll step
-(setq scroll-step 1
-			scroll-conservatively 10000)
-
-(setq mouse-wheel-scroll-amount '(3 ((shift) . 1)))
-(setq mouse-wheel-progressive-speed nil)
-
-;; Not create bkp/lockfiles
-(setq auto-save-default nil)
-(setq backup-inhibited t)
-(setq create-lockfiles nil)
-(setq make-backup-files nil)
-(auto-save-mode nil)
-
-;; Remove subtitle legend on press one key
-(setq echo-keystrokes 0)
-
-;; Disable Tooltips
-(setq x-gtk-use-system-tooltips nil)
-(setq use-system-tooltips nil)
+;; Enable auto save
+(auto-save-visited-mode 1)
 
 ;; Set utf enconding
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
-
-;; Disable Tooltips
-(setq x-gtk-use-system-tooltips nil)
-(setq use-system-tooltips nil)
-
-;; Add other files to identity a project
-(setq project-vc-extra-root-markers '(".dir-locals.el"))
 
 ;; Duplicate current line, at same point
 (defun my/duplicate-line ()
@@ -104,12 +96,12 @@
 		(let ((p (make-process :name "wl-copy" :command '("wl-copy") :connection-type 'pipe)))
 			(process-send-string p text)
 			(process-send-eof p)))
-	(setq interprogram-cut-function 'wl-copy))
+	(setopt interprogram-cut-function 'wl-copy))
 
 (when (executable-find "wl-paste")
 	(defun wl-paste ()
 		(shell-command-to-string "wl-paste"))
-	(setq interprogram-paste-function 'wl-paste))
+	(setopt interprogram-paste-function 'wl-paste))
 
 (use-package corfu
 	:ensure t
@@ -131,8 +123,7 @@
 
 (use-package emacs
 	:custom
-	(window-sides-vertical t)
-	)
+	(window-sides-vertical t))
 
 (defun my/eglot-capf ()
 	(setq-local completion-at-point-functions
@@ -178,10 +169,9 @@
 (use-package orderless
 	:ensure t
 	:init
-	(setq completion-styles '(orderless basic))
-	(setq completion-category-defaults nil)
-	(setq completion-category-overrides
-				'((file (styles partial-completion)))))
+	(setopt completion-styles '(orderless basic)
+					completion-category-defaults nil
+					completion-category-overrides	'((file (styles partial-completion)))))
 
 
 ;; Marginalia
@@ -222,21 +212,21 @@
 
 	(advice-add 'gt-make-completion-table :around #'my/gt-fix-category)
 
-	(setq gt-default-translator
-				(gt-translator :engines (gt-google-engine)
-											 :taker (gt-taker :langs '(en pt) :text 'word)
-											 :render (gt-buffer-render)))
+	(setopt gt-default-translator
+					(gt-translator :engines (gt-google-engine)
+												 :taker (gt-taker :langs '(en pt) :text 'word)
+												 :render (gt-buffer-render))
 
-	(setq gt-preset-translators
-				`((en-pt . ,(gt-translator
-										 :taker (gt-taker :langs '(en pt) :text 'word)
-										 :engines (gt-google-engine)
-										 :render (gt-buffer-render)))
-					(pt-en . , (gt-translator
-											:taker (gt-taker :langs '(pt en) :text 'word)
-											:engines (gt-google-engine)
-											:render (gt-buffer-render)
-											)))))
+					gt-preset-translators
+					`((en-pt . ,(gt-translator
+											 :taker (gt-taker :langs '(en pt) :text 'word)
+											 :engines (gt-google-engine)
+											 :render (gt-buffer-render)))
+						(pt-en . , (gt-translator
+												:taker (gt-taker :langs '(pt en) :text 'word)
+												:engines (gt-google-engine)
+												:render (gt-buffer-render)
+												)))))
 
 (use-package treesit-auto
 	:config
@@ -249,7 +239,7 @@
 	(treesit-auto-install t)
 	(treesit-font-lock-level 4)
 	:init
-	(setq treesit-language-source-alist
+	(setopt treesit-language-source-alist
 				'((bash				. ("https://github.com/tree-sitter/tree-sitter-bash.git" "v0.23.3"))
 					(c					. ("https://github.com/tree-sitter/tree-sitter-c.git" "v0.23.6"))
 					(cpp				. ("https://github.com/tree-sitter/tree-sitter-cpp.git" "v0.23.4"))

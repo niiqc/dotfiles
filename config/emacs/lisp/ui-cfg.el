@@ -9,9 +9,9 @@
 	 ("C-<f5>" . modus-themes-select)
 	 ("M-<f5>" . modus-themes-load-random))
 	:config
-	(setq modus-themes-mixed-fonts t)
-	(setq modus-themes-italic-constructs t)
-	(modus-themes-load-theme 'ef-night))
+	(setopt modus-themes-mixed-fonts nil
+					modus-themes-italic-constructs t)
+ 	(modus-themes-load-theme 'ef-night))
 
 (use-package nerd-icons
 	:ensure t
@@ -182,17 +182,21 @@
 ;; Configurations for graphic mode
 (when (display-graphic-p)
 	(set-face-attribute 'default nil
-											:font "JetBrainsMono Nerd Font Mono"
-											:height 120))
+											:font "CaskaydiaMono Nerd Font Mono"
+											:height 140))
 
 ;; Resizing a frame rounds its sizes to the frame's
-(setq frame-resize-pixelwise t)
+(setopt frame-resize-pixelwise t
 
-;; Show relative line numbers
-(setq display-line-numbers-type 'relative)
+	;; Show relative line numbers
+	display-line-numbers-type 'relative)
+
+
+;; Global line numbers
 (global-display-line-numbers-mode)
 
-(dolist (mode '(eshell-mode-hook dired-mode-hook treemacs-mode-hook lsp-ui-imenu-mode-hook image-mode-hook doc-view-mode-hook))
+;; Disable line numbers in specific modes
+(dolist (mode '(eshell-mode-hook dired-mode-hook image-mode-hook doc-view-mode-hook))
 	(add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Enable current line highlithing
@@ -209,12 +213,5 @@
 
 ;; Enable which key
 (which-key-mode)
-
-;; Define tab width
-(setq-default indent-tabs-mode t
-							standard-indent 2
-							tab-width 2
-							backward-delete-char-untabify-method nil
-							)
 
 (provide 'ui-cfg)

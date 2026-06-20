@@ -40,7 +40,10 @@
 	:defer t
 	:ensure t)
 
-(setq-default indent-tabs-mode t
-							standard-indent 2)
+;; Configure defaults tabs
+(setopt indent-tabs-mode t
+				standard-indent 2
+				tab-width 2
+				backward-delete-char-untabify-method nil)
 
 (provide 'keybinds-cfg)

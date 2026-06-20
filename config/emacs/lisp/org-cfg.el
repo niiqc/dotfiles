@@ -12,12 +12,13 @@
 											 (setq-local fill-column 100)
 											 (display-fill-column-indicator-mode 1)))
 	:config
-	(setq org-ellipsis " ⤵"
-				org-pretty-entities	t
-				org-fontify-whole-heading-line t
-				org-fontify-done-headline t
-				org-fontify-quote-and-verse-blocks t
-				org-src-preserve-indentation t)
+	(setopt org-ellipsis " ⤵"
+					org-pretty-entities	t
+					org-fontify-whole-heading-line t
+					org-fontify-done-headline t
+					org-fontify-quote-and-verse-blocks t
+					org-src-preserve-indentation t)
+
 	(org-babel-do-load-languages
 	 'org-babel-load-languages
 	 '((mermaid . t))))
