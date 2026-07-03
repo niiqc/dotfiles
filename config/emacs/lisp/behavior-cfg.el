@@ -280,7 +280,7 @@
 				("<mouse-3>" . dired-mouse-find-file-other-window))
 	:custom
 	;; Set dired default args do be more organized.
-	(dired-listing-switches "-a --human-readable --group-directories-first --no-group --dired"))
+	(dired-listing-switches "-al --human-readable --group-directories-first --no-group --dired"))
 
 (use-package csv-mode
 	:defer t
