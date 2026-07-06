@@ -1,4 +1,4 @@
- (use-modules
+(use-modules
  (gnu home)
  (gnu home services)
  (gnu home services desktop)
@@ -98,7 +98,7 @@
 	 (simple-service 'home-shell-environment-variables
 									 home-environment-variables-service-type
 									 `(("PATH" . "$HOME/.local/bin:$PATH")
-				 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS")))
+										 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS")))
 
 	 (simple-service 'home-extra-channels
 			 home-channels-service-type
