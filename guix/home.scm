@@ -29,6 +29,7 @@
  (gnu packages xdisorg) ; xsettingsd
  (gnu packages ssh) ; openssh
  (gnu packages rust-apps) ; ripgrep
+ (gnu packages xorg) ; xrdb
  (guix gexp) ; local-file
  (guix channels) ; guix channels
  (saayix packages binaries)) ; zen-browser-bin
@@ -48,6 +49,7 @@
 	 okular
 	 openssh
 	 ripgrep
+	 xrdb
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
@@ -73,7 +75,7 @@
 	 (service home-gpg-agent-service-type
 						(home-gpg-agent-configuration
 						 (pinentry-program
-							(file-append pinentry-qt "/bin/pinentry-qt"))))
+							(file-append pinentry "/bin/pinentry"))))
 
 	 (service home-pipewire-service-type
 						(home-pipewire-configuration
