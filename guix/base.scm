@@ -1,147 +1,145 @@
 (define-module (base)
-  #| GNU Packages |#
-  #:use-module (gnu packages file)
-  #:use-module (gnu packages shells)
-  #:use-module (gnu packages fonts)
-  #:use-module (gnu packages compression)
+	#| GNU Packages |#
+	#:use-module (gnu packages file)
+	#:use-module (gnu packages shells)
+	#:use-module (gnu packages fonts)
+	#:use-module (gnu packages compression)
 
-  #| GNU System |#
-  #:use-module (gnu)
-  #:use-module (gnu system)
-  #:use-module (gnu services)
-  #:use-module (gnu services base)
-  #:use-module (gnu services desktop)
-  #:use-module (gnu services linux)
-  #:use-module (gnu services pm)
-  #:use-module (gnu services sysctl)
-  #:use-module (gnu services xorg)
+	#| GNU System |#
+	#:use-module (gnu)
+	#:use-module (gnu system)
+	#:use-module (gnu services)
+	#:use-module (gnu services base)
+	#:use-module (gnu services desktop)
+	#:use-module (gnu services linux)
+	#:use-module (gnu services pm)
+	#:use-module (gnu services sysctl)
+	#:use-module (gnu services xorg)
 
-  #| Guix |#
-  #:use-module (guix channels)
+	#| Guix |#
+	#:use-module (guix channels)
 
-  #| Nonguix |#
-  #:use-module (nongnu packages linux)
-  #:use-module (nongnu system linux-initrd)
+	#| Nonguix |#
+	#:use-module (nongnu packages linux)
+	#:use-module (nongnu system linux-initrd)
 
-  #| Radix |#
-  #:use-module (radix system monitoring)
-  
-  #| Rosenthal |#
-  #:use-module (rosenthal services base)
+	#| Radix |#
+	#:use-module (radix system monitoring)
 
-  #:export (base))
+	#| Rosenthal |#
+	#:use-module (rosenthal services base)
+
+	#:export (base))
 
 (define channels-with-nonguix
-  (list (channel
-         (inherit %default-guix-channel)
-         (name 'guix)
-         (url "https://git.guix.gnu.org/guix.git"))
-        (channel
-         (name 'nonguix)
-         (url "https://gitlab.com/nonguix/nonguix")
-         (introduction
-          (make-channel-introduction
-           "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
-           (openpgp-fingerprint
-            "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))))
+	(list (channel
+				 (inherit %default-guix-channel)
+				 (name 'guix)
+				 (url "https://git.guix.gnu.org/guix.git"))
+				(channel
+				 (name 'nonguix)
+				 (url "https://gitlab.com/nonguix/nonguix")
+				 (introduction
+					(make-channel-introduction
+					 "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
+					 (openpgp-fingerprint
+						"2A39 3FFF 68F4 EF7A 3D29	 12AF 6F51 20A0 22FB B2D5"))))))
 
 (define nonguix-signing-key
-  (plain-file "nonguix.pub"
-	      "(public-key (ecc (curve Ed25519)
+	(plain-file "nonguix.pub"
+							"(public-key (ecc (curve Ed25519)
  (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
 
 (define base
-  (operating-system
-   (locale "en_US.utf8")
-   (timezone "America/Sao_Paulo")
-   (keyboard-layout (keyboard-layout "us" "altgr-intl"))
-   (host-name "base")
-   (kernel linux)
-   (kernel-arguments
-    (list "loglevel=3"
-	  "quiet"))
-   (firmware (cons* linux-firmware  %base-firmware))
-   (initrd microcode-initrd)
+	(operating-system
+	 (locale "en_US.utf8")
+	 (timezone "America/Sao_Paulo")
+	 (keyboard-layout (keyboard-layout "us" "altgr-intl"))
+	 (host-name "base")
+	 (kernel linux)
+	 (kernel-arguments
+		(list "loglevel=3"
+					"quiet"))
+	 (firmware (cons* linux-firmware	%base-firmware))
+	 (initrd microcode-initrd)
 
-   ;; We don't use any file-systems for the base operating-system
-   (file-systems '())
+	 ;; We don't use any file-systems for the base operating-system
+	 (file-systems '())
 
-   (bootloader (bootloader-configuration
-		(bootloader grub-efi-bootloader)
-		(targets (list "/boot/efi"))
-		(keyboard-layout keyboard-layout))) 
+	 (bootloader (bootloader-configuration
+								(bootloader grub-efi-bootloader)
+								(targets (list "/boot/efi"))
+								(keyboard-layout keyboard-layout)))
 
-    (users (cons* (user-account
-                   (name "nick")
-                   (comment "nick")
-		   (shell (file-append fish "/bin/fish"))
-                   (group "users")
-                   (home-directory "/home/nick")
-                   (supplementary-groups '("wheel" "netdev" "audio" "video")))
-		  %base-user-accounts))
+	 (users (cons* (user-account
+									(name "nick")
+									(comment "nick")
+									(shell (file-append fish "/bin/fish"))
+									(group "users")
+									(home-directory "/home/nick")
+									(supplementary-groups '("wheel" "netdev" "audio" "video")))
+								 %base-user-accounts))
 
-    (packages
-     (append
-      (list
-	#|compression	|# gzip unzip xz
-	#|file		|# file
-	#|fonts		|# font-google-noto font-google-noto-emoji font-sarasa-gothic)
-      %base-packages))
+	 (packages
+		(append
+		 (list
+			#|compression	|# gzip unzip xz
+			#|file				|# file
+			#|fonts				|# font-google-noto font-google-noto-emoji font-sarasa-gothic)
+		 %base-packages))
 
-    ;; Services
-    (services
-     (append
-      (list
-       (service plasma-desktop-service-type)
-       
-       (service greetd-service-type
-		(greetd-configuration
-		 (terminals
-		  (list
-		   (greetd-terminal-configuration
-		    (terminal-vt "1")
-		    (terminal-switch #t)
-		    (default-session-command
-		      (greetd-tuigreet-session
-		       (args '("--issue"
-			       "--time"
-			       "--user-menu"
-			       "--remember"
-			       "--remember-session"
-			       "--asterisks"
-			       "--sessions" "/run/current-system/profile/share/wayland-sessions"
-			       "--xsessions" "/run/current-system/profile/share/xsessions")))))
-		   (greetd-terminal-configuration (terminal-vt "2"))
-		   (greetd-terminal-configuration (terminal-vt "3"))
-		   (greetd-terminal-configuration (terminal-vt "4"))
-		   (greetd-terminal-configuration (terminal-vt "5"))
-		   (greetd-terminal-configuration (terminal-vt "6"))))))
+	 ;; Services
+	 (services
+		(append
+		 (list
+			(service plasma-desktop-service-type)
 
-       ;; Power profiles daemon
-       (service power-profiles-daemon-service-type)
+			(service greetd-service-type
+							 (greetd-configuration
+								(terminals
+								 (list
+									(greetd-terminal-configuration
+									 (terminal-vt "1")
+									 (terminal-switch #t)
+									 (default-session-command
+										 (greetd-tuigreet-session
+											(args '("--issue"
+															"--time"
+															"--user-menu"
+															"--remember"
+															"--remember-session"
+															"--asterisks"
+															"--sessions" "/run/current-system/profile/share/wayland-sessions"
+															"--xsessions" "/run/current-system/profile/share/xsessions")))))
+									(greetd-terminal-configuration (terminal-vt "2"))
+									(greetd-terminal-configuration (terminal-vt "3"))
+									(greetd-terminal-configuration (terminal-vt "4"))
+									(greetd-terminal-configuration (terminal-vt "5"))
+									(greetd-terminal-configuration (terminal-vt "6"))))))
 
-       
-       ;; Zram configuration
-       (service zram-device-service-type
-		(zram-device-configuration
-		 (priority 100)
-		 (size (ram-total))
-		 (compression-algorithm 'zstd)))
+			;; Power profiles daemon
+			(service power-profiles-daemon-service-type)
 
+			;; Zram configuration
+			(service zram-device-service-type
+							 (zram-device-configuration
+								(priority 100)
+								(size (ram-total))
+								(compression-algorithm 'zstd)))
 
-       (simple-service 'zram-sysctl-settings
-		       sysctl-service-type
-		       `(("vm.swappiness" . "180")
-			 ("vm.watermark_boost_factor" . "0")
-			 ("vm.watermark_scale_factor" . "125")
-			 ("vm.page-cluster" . "0"))))
+			(simple-service 'zram-sysctl-settings
+											sysctl-service-type
+											`(("vm.swappiness" . "180")
+												("vm.watermark_boost_factor" . "0")
+												("vm.watermark_scale_factor" . "125")
+												("vm.page-cluster" . "0"))))
 
-      (modify-services %desktop-services
-                       ;; Set up Nonguix channel in /etc/guix/channels.scm.
-                       (delete gdm-service-type)
-                       (delete login-service-type)
-                       (delete mingetty-service-type)
-                       (guix-service-type config =>
-					  (guix-configuration (inherit config)
-                                                              (channels
-                                                               channels-with-nonguix))))))))
+		 (modify-services %desktop-services
+											;; Set up Nonguix channel in /etc/guix/channels.scm.
+											(delete gdm-service-type)
+											(delete login-service-type)
+											(delete mingetty-service-type)
+											(guix-service-type config =>
+																				 (guix-configuration (inherit config)
+																														 (channels
+																															channels-with-nonguix))))))))
