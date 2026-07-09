@@ -4,6 +4,7 @@
 	#:use-module (gnu packages shells)
 	#:use-module (gnu packages fonts)
 	#:use-module (gnu packages compression)
+	#:use-module (gnu packages display-managers)
 
 	#| GNU System |#
 	#:use-module (gnu)
@@ -15,6 +16,7 @@
 	#:use-module (gnu services pm)
 	#:use-module (gnu services sysctl)
 	#:use-module (gnu services xorg)
+	#:use-module (gnu services sddm)
 
 	#| Guix |#
 	#:use-module (guix channels)
@@ -25,9 +27,6 @@
 
 	#| Radix |#
 	#:use-module (radix system monitoring)
-
-	#| Rosenthal |#
-	#:use-module (rosenthal services base)
 
 	#:export (base))
 
@@ -83,9 +82,9 @@
 	 (packages
 		(append
 		 (list
-			#|compression	|# gzip unzip xz
-			#|file				|# file
-			#|fonts				|# font-google-noto font-google-noto-emoji font-sarasa-gothic)
+			gzip unzip xz
+			file
+			font-google-noto font-google-noto-emoji font-sarasa-gothic)
 		 %base-packages))
 
 	 ;; Services
@@ -94,28 +93,11 @@
 		 (list
 			(service plasma-desktop-service-type)
 
-			(service greetd-service-type
-							 (greetd-configuration
-								(terminals
-								 (list
-									(greetd-terminal-configuration
-									 (terminal-vt "1")
-									 (terminal-switch #t)
-									 (default-session-command
-										 (greetd-tuigreet-session
-											(args '("--issue"
-															"--time"
-															"--user-menu"
-															"--remember"
-															"--remember-session"
-															"--asterisks"
-															"--sessions" "/run/current-system/profile/share/wayland-sessions"
-															"--xsessions" "/run/current-system/profile/share/xsessions")))))
-									(greetd-terminal-configuration (terminal-vt "2"))
-									(greetd-terminal-configuration (terminal-vt "3"))
-									(greetd-terminal-configuration (terminal-vt "4"))
-									(greetd-terminal-configuration (terminal-vt "5"))
-									(greetd-terminal-configuration (terminal-vt "6"))))))
+			;; Sddm
+			(service sddm-service-type
+							 (sddm-configuration
+								(theme "breeze")
+								(sddm sddm)))
 
 			;; Power profiles daemon
 			(service power-profiles-daemon-service-type)
@@ -137,8 +119,6 @@
 		 (modify-services %desktop-services
 											;; Set up Nonguix channel in /etc/guix/channels.scm.
 											(delete gdm-service-type)
-											(delete login-service-type)
-											(delete mingetty-service-type)
 											(guix-service-type config =>
 																				 (guix-configuration (inherit config)
 																														 (channels

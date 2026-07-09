@@ -129,13 +129,4 @@
 				 (make-channel-introduction
 					"f9130e11e35d2c147c6764ef85542dc58dc09c4f"
 					(openpgp-fingerprint
-					 "F164 709E 5FC7 B32B AEC7 9F37 1F2E 76AC E3F5 31C8"))))
-			 (channel
-				(name 'rosenthal)
-				(url "https://codeberg.org/hako/rosenthal.git")
-				(branch "trunk")
-				(introduction
-				 (make-channel-introduction
-					"7677db76330121a901604dfbad19077893865f35"
-					(openpgp-fingerprint
-					 "13E7 6CD6 E649 C28C 3385	 4DF5 5E5A A665 6149 17F7")))))))))
+					 "F164 709E 5FC7 B32B AEC7 9F37 1F2E 76AC E3F5 31C8")))))))))
