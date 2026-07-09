@@ -30,6 +30,7 @@
  (gnu packages ssh) ; openssh
  (gnu packages rust-apps) ; ripgrep
  (gnu packages xorg) ; xrdb
+ (gnu packages freedesktop) ; xdg-desktop-portal-(kde|gtk)
  (guix gexp) ; local-file
  (guix channels) ; guix channels
  (saayix packages binaries)) ; zen-browser-bin
@@ -64,6 +65,8 @@
 	 gcc-toolchain
 	 xsettingsd
 	 zen-browser-bin
+	 xdg-desktop-portal-gtk
+	 xdg-desktop-portal-kde
 	 ))
 
  (services
