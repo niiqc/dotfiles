@@ -30,6 +30,7 @@
  (gnu packages ssh) ; openssh
  (gnu packages rust-apps) ; ripgrep
  (gnu packages xorg) ; xrdb
+ (gnu packages pretty-print) ; source-highlight
  (gnu packages freedesktop) ; xdg-desktop-portal-(kde|gtk)
  (guix gexp) ; local-file
  (guix channels) ; guix channels
@@ -51,6 +52,7 @@
 	 openssh
 	 ripgrep
 	 xrdb
+	 source-highlight
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
@@ -103,7 +105,9 @@
 	 (simple-service 'home-shell-environment-variables
 									 home-environment-variables-service-type
 									 `(("PATH" . "$HOME/.local/bin:$PATH")
-										 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS")))
+										 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS")
+										 ("LESSOPEN" . "| src-hilite-lesspipe.sh %s")
+										 ("LESS" . " --raw-control-chars --tabs 2 --LINE-NUMBERS ")))
 
 	 (simple-service 'home-extra-channels
 			 home-channels-service-type
