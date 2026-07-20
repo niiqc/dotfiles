@@ -3,13 +3,14 @@
   #:use-module (gnu system mapped-devices)
   #:use-module (gnu system uuid)
   #:use-module (gnu system file-systems)
+  #:use-module (gnu system keyboard)
   #:use-module (base))
 
 (define vaio
   (operating-system
    (inherit base)
    (host-name "vaio")
-
+   (keyboard-layout (keyboard-layout "br"))
    (mapped-devices
     (list
      (mapped-device
