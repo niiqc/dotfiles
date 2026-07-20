@@ -32,6 +32,7 @@
  (gnu packages xorg) ; xrdb
  (gnu packages pretty-print) ; source-highlight
  (gnu packages freedesktop) ; xdg-desktop-portal-(kde|gtk)
+ (gnu packages web); jq
  (guix gexp) ; local-file
  (guix channels) ; guix channels
  (saayix packages binaries)) ; zen-browser-bin
@@ -53,6 +54,7 @@
 	 ripgrep
 	 xrdb
 	 source-highlight
+	 jq
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
