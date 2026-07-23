@@ -5,10 +5,12 @@
 	#:use-module (gnu packages fonts)
 	#:use-module (gnu packages compression)
 	#:use-module (gnu packages display-managers)
+	#:use-module (gnu packages virtualization)
 
 	#| GNU System |#
 	#:use-module (gnu)
 	#:use-module (gnu system)
+	#:use-module (gnu system privilege)
 	#:use-module (gnu services)
 	#:use-module (gnu services base)
 	#:use-module (gnu services desktop)
@@ -17,6 +19,7 @@
 	#:use-module (gnu services sysctl)
 	#:use-module (gnu services xorg)
 	#:use-module (gnu services sddm)
+	#:use-module (gnu services virtualization)
 
 	#| Guix |#
 	#:use-module (guix channels)
@@ -76,8 +79,14 @@
 									(shell (file-append fish "/bin/fish"))
 									(group "users")
 									(home-directory "/home/nick")
-									(supplementary-groups '("wheel" "netdev" "audio" "video")))
+									(supplementary-groups '("wheel" "netdev" "audio" "video" "kvm" "libvirt")))
 								 %base-user-accounts))
+
+	 (privileged-programs
+    (append (list (privileged-program
+                   (program (file-append qemu "/libexec/qemu-bridge-helper"))
+                   (setuid? #t)))
+            %default-privileged-programs))
 
 	 (packages
 		(append
@@ -108,6 +117,18 @@
 								(priority 100)
 								(size (ram-total))
 								(compression-algorithm 'zstd)))
+
+			(service libvirt-service-type
+							 (libvirt-configuration
+								(tls-port "16555")
+								(qemu qemu)))
+
+			(service virtlog-service-type
+							 (virtlog-configuration
+								(max-clients 1000)))
+
+			(extra-special-file "/etc/qemu/bridge.conf"
+													(plain-file "bridge.conf" "allow virbr0\n"))
 
 			(simple-service 'zram-sysctl-settings
 											sysctl-service-type

@@ -33,9 +33,11 @@
  (gnu packages pretty-print) ; source-highlight
  (gnu packages freedesktop) ; xdg-desktop-portal-(kde|gtk)
  (gnu packages web); jq
+ (gnu packages virtualization) ; libvirt
  (guix gexp) ; local-file
  (guix channels) ; guix channels
- (saayix packages binaries)) ; zen-browser-bin
+ (saayix packages binaries) ; zen-browser-bin
+ (tuco packages virtualization)) ; quickemu
 
 (home-environment
  (packages
@@ -55,6 +57,8 @@
 	 xrdb
 	 source-highlight
 	 jq
+	 quickemu
+	 libvirt
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
@@ -138,4 +142,13 @@
 				 (make-channel-introduction
 					"f9130e11e35d2c147c6764ef85542dc58dc09c4f"
 					(openpgp-fingerprint
-					 "F164 709E 5FC7 B32B AEC7 9F37 1F2E 76AC E3F5 31C8")))))))))
+					 "F164 709E 5FC7 B32B AEC7 9F37 1F2E 76AC E3F5 31C8"))))
+			 (channel
+				(name 'tuco)
+				(branch "main")
+				(url "https://codeberg.org/niqc/tuco")
+				(introduction
+				 (make-channel-introduction
+					"5728b7a5854267de9ef9f30300d946fbb72f8ea4"
+					(openpgp-fingerprint
+					 "EA18 B34E FD42 9D71 B9D5 4D3D CB9A 70FA CE87 C135")))))))))
