@@ -48,9 +48,6 @@
 ;; use editorconfig from project
 (editorconfig-mode t)
 
-;; Remove white space from end of file
-(add-hook 'before-save-hook #'whitespace-cleanup)
-
 ;; Enable auto save
 (auto-save-visited-mode 1)
 
