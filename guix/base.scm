@@ -127,8 +127,10 @@
 							 (virtlog-configuration
 								(max-clients 1000)))
 
-			(extra-special-file "/etc/qemu/bridge.conf"
-													(plain-file "bridge.conf" "allow virbr0\n"))
+			(simple-service 'qemu-bridge-config
+                etc-service-type
+                (list `("qemu/bridge.conf"
+                        ,(plain-file "bridge.conf" "allow virbr0\n"))))
 
 			(simple-service 'zram-sysctl-settings
 											sysctl-service-type
