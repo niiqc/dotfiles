@@ -34,6 +34,7 @@
  (gnu packages freedesktop) ; xdg-desktop-portal-(kde|gtk)
  (gnu packages web); jq
  (gnu packages virtualization) ; libvirt
+ (gnu packages kde-xyz) ; plasma-applet-kde-material-you-colors
  (guix gexp) ; local-file
  (guix channels) ; guix channels
  (saayix packages binaries) ; zen-browser-bin
@@ -75,6 +76,7 @@
 	 zen-browser-bin
 	 xdg-desktop-portal-gtk
 	 xdg-desktop-portal-kde
+	 plasma-applet-kde-material-you-colors
 	 ))
 
  (services
