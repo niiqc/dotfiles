@@ -13,7 +13,7 @@
    (mapped-devices
     (list
      (mapped-device
-      (source (uuid "38c5bad7-5ee7-41cb-923a-c8435e7edf18"))
+      (source (uuid "278e3819-1918-4fc4-badf-bc1b5fc87d7d"))
       (target "cryptroot")
       (type luks-device-mapping))))
    
@@ -27,7 +27,7 @@
       (options "compress=zstd"))
      (file-system
       (mount-point "/boot/efi")
-      (device (uuid "1E5E-DCEE" 'fat32))
+      (device (uuid "350E-6955" 'fat32))
       (type "vfat")) 
      %base-file-systems))))
 
