@@ -35,6 +35,7 @@
  (gnu packages web); jq
  (gnu packages virtualization) ; libvirt
  (gnu packages kde-xyz) ; plasma-applet-kde-material-you-colors
+ (nongnu packages game-client) ; protonup steam
  (guix gexp) ; local-file
  (guix channels) ; guix channels
  (saayix packages binaries) ; zen-browser-bin
@@ -60,6 +61,8 @@
 	 jq
 	 quickemu
 	 libvirt
+	 steam
+	 protonup
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
