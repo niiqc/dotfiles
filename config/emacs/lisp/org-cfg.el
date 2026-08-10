@@ -7,7 +7,7 @@
 	(org-startup-indented t)
 	(org-src-tab-acts-natively t)
 	(org-src-fontify-natively t)
-	:hook (org-mode .	 (lambda ()
+	:hook (org-mode .	(lambda ()
 											 (setq-local visual-line-move-text t)
 											 (setq-local fill-column 100)
 											 (display-fill-column-indicator-mode 1)))
@@ -22,21 +22,6 @@
 	(org-babel-do-load-languages
 	 'org-babel-load-languages
 	 '((mermaid . t))))
-
-;; Mermaid
-(use-package ob-mermaid
-	:ensure t
-	:init
-	(add-to-list 'org-src-lang-modes '("mermaid" . mermaid))
-
-	(defun org/update-mmdc ()
-		(interactive)
-		(shell-command "npm update -g @mermaid-js/mermaid-cli"))
-
-	(unless (executable-find "mmdc")
-		(when (executable-find "npm")
-			(shell-command "npm install -g @mermaid-js/mermaid-cli")))
-	:after org)
 
 (use-package outline-mode
 	:custom
