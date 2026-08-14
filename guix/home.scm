@@ -11,16 +11,17 @@
  (gnu packages linux) ; wirepluber
  (gnu packages glib) ; glib
  (gnu packages kde-utils) ; ark kate kcalc
- (gnu packages kde-plasma) ; plasma-disks
+ (gnu packages kde-plasma) ; plasma-disks plasma-browser-integration
  (gnu packages kde-internet) ; kdeconnect
  (gnu packages qt) ; qtbase
  (gnu packages commencement) ; gcc-toolchain
  (gnu packages compression) ; unzip
- (gnu packages kde-graphics) ; okular
+ (gnu packages kde-graphics) ; okular gwenview
  (gnu packages rust-apps) ; ripgrep uv
  (gnu packages package-management) ; flatpak
  (gnu packages gtk) ; appmenu-gtk-module libdbusmenu
  (gnu packages shells) ; fish
+ (gnu packages shellutils) ; starship
  (gnu packages gtk) ; appmenu-gtk-module libdbusmenu
  (gnu packages gnupg) ; gnupg
  (gnu packages base) ; coreutils
@@ -33,6 +34,7 @@
  (gnu packages pretty-print) ; source-highlight
  (gnu packages freedesktop) ; xdg-desktop-portal-(kde|gtk)
  (gnu packages web); jq
+ (gnu packages video); vlc
  (gnu packages virtualization) ; libvirt
  (gnu packages kde-xyz) ; plasma-applet-kde-material-you-colors
  (nongnu packages game-client) ; protonup steam
@@ -63,6 +65,10 @@
 	 libvirt
 	 steam
 	 protonup
+	 vlc
+	 gwenview
+	 plasma-browser-integration
+	 starship
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
