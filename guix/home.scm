@@ -21,7 +21,7 @@
  (gnu packages package-management) ; flatpak
  (gnu packages gtk) ; appmenu-gtk-module libdbusmenu
  (gnu packages shells) ; fish
- (gnu packages shellutils) ; starship
+ (gnu packages shellutils) ; starship direnv
  (gnu packages gtk) ; appmenu-gtk-module libdbusmenu
  (gnu packages gnupg) ; gnupg
  (gnu packages base) ; coreutils
@@ -69,6 +69,7 @@
 	 gwenview
 	 plasma-browser-integration
 	 starship
+	 direnv
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
