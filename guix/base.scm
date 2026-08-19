@@ -62,7 +62,7 @@
 	 (kernel-arguments
 		(list "loglevel=3"
 					"quiet"))
-	 (firmware (cons* linux-firmware	%base-firmware))
+	 (firmware (list linux-firmware))
 	 (initrd microcode-initrd)
 
 	 ;; We don't use any file-systems for the base operating-system
