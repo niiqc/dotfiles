@@ -28,8 +28,8 @@
 	#:use-module (nongnu packages linux)
 	#:use-module (nongnu system linux-initrd)
 
-	#| Radix |#
-	#:use-module (radix system monitoring)
+	#| Tuco |#
+	#:use-module (tuco system monitoring)
 
 	#:export (base))
 
