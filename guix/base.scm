@@ -40,7 +40,7 @@
 				 (url "https://git.guix.gnu.org/guix.git"))
 				(channel
 				 (name 'nonguix)
-				 (url "https://gitlab.com/nonguix/nonguix")
+				 (url "https://gitlab.com/nonguix/nonguix.git")
 				 (introduction
 					(make-channel-introduction
 					 "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
@@ -137,7 +137,13 @@
 											`(("vm.swappiness" . "180")
 												("vm.watermark_boost_factor" . "0")
 												("vm.watermark_scale_factor" . "125")
-												("vm.page-cluster" . "0"))))
+												("vm.page-cluster" . "0")))
+
+			(simple-service 'nonguix-substitutes
+											guix-service-type
+											(guix-extension
+												(substitute-urls '("https://substitutes.nonguix.org"))
+												(authorized-keys (list nonguix-signing-key)))))
 
 		 (modify-services %desktop-services
 											;; Set up Nonguix channel in /etc/guix/channels.scm.
