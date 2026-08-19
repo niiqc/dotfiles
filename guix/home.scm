@@ -109,16 +109,7 @@
 						 (aliases '())
 						 (bashrc (list (local-file "/home/nick/.bashrc" "bashrc")))))
 
-	 (service home-xdg-user-directories-service-type
-						(home-xdg-user-directories-configuration
-						 (desktop			"$HOME/Desktop/")
-						 (documents		"$HOME/Documents/")
-						 (download		"$HOME/Downloads/")
-						 (music				"$HOME/Music/")
-						 (pictures		"$HOME/Pictures/")
-						 (videos			"$HOME/Videos/")
-						 (templates		"$HOME/Templates")
-						 (publicshare "$HOME/Public")))
+	 (service home-xdg-user-directories-service-type)
 
 	 (simple-service 'home-shell-environment-variables
 									 home-environment-variables-service-type
