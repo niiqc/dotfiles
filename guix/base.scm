@@ -11,6 +11,7 @@
 	#:use-module (gnu)
 	#:use-module (gnu system)
 	#:use-module (gnu system privilege)
+	#:use-module (gnu system accounts) ; subid-range
 	#:use-module (gnu services)
 	#:use-module (gnu services base)
 	#:use-module (gnu services desktop)
@@ -20,6 +21,8 @@
 	#:use-module (gnu services xorg)
 	#:use-module (gnu services sddm)
 	#:use-module (gnu services virtualization)
+	#:use-module (gnu services networking) ; nftables-service-type
+	#:use-module (gnu services containers) ; rootless-podman-service-type, rootless-podman-configuration
 
 	#| Guix |#
 	#:use-module (guix channels)
@@ -79,7 +82,7 @@
 									(shell (file-append fish "/bin/fish"))
 									(group "users")
 									(home-directory "/home/nick")
-									(supplementary-groups '("wheel" "netdev" "audio" "video" "kvm" "libvirt")))
+									(supplementary-groups '("wheel" "netdev" "audio" "video" "kvm" "libvirt" "cgroup")))
 								 %base-user-accounts))
 
 	 (privileged-programs
@@ -131,6 +134,13 @@
                 etc-service-type
                 (list `("qemu/bridge.conf"
                         ,(plain-file "bridge.conf" "allow virbr0\n"))))
+
+			(service nftables-service-type)
+			
+			(service rootless-podman-service-type
+							 (rootless-podman-configuration
+								(subgids (list (subid-range (name "nick"))))
+								(subuids (list (subid-range (name "nick"))))))
 
 			(simple-service 'zram-sysctl-settings
 											sysctl-service-type

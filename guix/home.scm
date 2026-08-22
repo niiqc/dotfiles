@@ -8,6 +8,7 @@
  (gnu home services sound) ; home-pipewire-service-type
  (gnu home services guix) ; guix channels
  (gnu home services ssh) ; home-ssh-agent-service-type
+ (gnu home services shepherd) ; home-shepherd-service-type
  (gnu packages linux) ; wirepluber
  (gnu packages glib) ; glib
  (gnu packages kde-utils) ; ark kate kcalc
@@ -37,6 +38,7 @@
  (gnu packages video); vlc
  (gnu packages virtualization) ; libvirt
  (gnu packages kde-xyz) ; plasma-applet-kde-material-you-colors
+ (gnu packages containers) ; podman podman-compose
  (nongnu packages game-client) ; protonup steam
  (guix gexp) ; local-file
  (guix channels) ; guix channels
@@ -70,6 +72,8 @@
 	 plasma-browser-integration
 	 starship
 	 direnv
+	 podman
+	 podman-compose
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
@@ -110,6 +114,25 @@
 						 (bashrc (list (local-file "/home/nick/.bashrc" "bashrc")))))
 
 	 (service home-xdg-user-directories-service-type)
+
+	 (simple-service 'podman-socket
+									 home-shepherd-service-type
+									 (list (shepherd-service
+													(provision '(podman-socket))
+													(modules '((guix build utils)))
+													(start
+													 #~(let* ((runtime-dir (or (getenv "XDG_RUNTIME_DIR")
+																										 (string-append
+																											"/run/user/"
+																											(number->string (getuid)))))
+																		(socket-dir (string-append runtime-dir "/podman")))
+															 (mkdir-p socket-dir)
+															 (make-forkexec-constructor
+																(list #$(file-append podman "/bin/podman")
+																			"system" "service" "--time=0"
+																			(string-append "unix://" socket-dir
+																										 "/podman.sock")))))
+													(stop #~(make-kill-destructor)))))
 
 	 (simple-service 'home-shell-environment-variables
 									 home-environment-variables-service-type
