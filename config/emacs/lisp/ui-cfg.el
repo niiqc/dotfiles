@@ -188,8 +188,11 @@
 ;; Resizing a frame rounds its sizes to the frame's
 (setopt frame-resize-pixelwise t
 
-	;; Show relative line numbers
-	display-line-numbers-type 'relative)
+				;; Show relative line numbers
+				display-line-numbers-type 'relative
+
+				;; Use bar cursor shape
+				cursor-type 'bar)
 
 
 ;; Global line numbers
