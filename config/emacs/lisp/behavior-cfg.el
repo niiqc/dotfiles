@@ -101,13 +101,11 @@
 	(setopt interprogram-paste-function 'wl-paste))
 
 (use-package corfu
-	:ensure t
-	:init (global-corfu-mode)
-	(corfu-popupinfo-mode 1)
+	:config (corfu-popupinfo-mode t)
 	:custom
 	(corfu-auto t)
 	(corfu-auto-prefix 1)
-	(corfu-auto-delay 0.1)
+	(corfu-auto-delay 0.5)
 	(corfu-cycle t)
 	(corfu-separator ?\s)
 	(corfu-quit-no-match 'separator)
@@ -116,7 +114,11 @@
 	(corfu-popupinfo-max-width 80)
 	(corfu-popupinfo-max-height 14)
 	(corfu-popupinfo-resize t)
-	(corfu-popupinfo-direction '(right vertical left)))
+	(corfu-popupinfo-direction '(right vertical left))
+	(corfu-history-mode t)
+	:ensure t
+	:init
+	(global-corfu-mode))
 
 (use-package emacs
 	:custom
@@ -134,9 +136,6 @@
 	:bind("C-c p" . cape-prefix-map)
 	:ensure t
 	:config (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-	:custom
-	(completion-category-overrides '((eglot (styles orderless))
-																	 (eglot-capf (styles orderless))))
 	:hook (eglot-managed-mode . my/eglot-capf)
 	:init
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
@@ -160,6 +159,7 @@
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
 	:ensure nil
+	:custom (savehist-additional-variables '(corfu-history))
 	:init
 	(savehist-mode))
 
@@ -168,8 +168,9 @@
 	:init
 	(setopt completion-styles '(orderless basic)
 					completion-category-defaults nil
-					completion-category-overrides	'((file (styles partial-completion)))))
-
+					completion-category-overrides '((file (styles partial-completion))
+																					(eglot (styles orderless))
+																					(eglot-capf (styles orderless)))))
 
 ;; Marginalia
 (use-package marginalia
