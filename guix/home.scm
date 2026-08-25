@@ -27,6 +27,7 @@
  (gnu packages gnupg) ; gnupg
  (gnu packages base) ; coreutils
  (gnu packages emacs) ; emacs
+ (gnu packages fonts) ; font-nerd-jetbrains-mono
  (gnu packages version-control) ; git
  (gnu packages xdisorg) ; xsettingsd
  (gnu packages ssh) ; openssh
@@ -74,6 +75,7 @@
 	 direnv
 	 podman
 	 podman-compose
+	 font-nerd-jetbrains-mono
 	 ;; pkg manager
 	 flatpak
 	 ;; deps

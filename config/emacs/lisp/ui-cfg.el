@@ -181,7 +181,7 @@
 ;; Configurations for graphic mode
 (when (display-graphic-p)
 	(set-face-attribute 'default nil
-											:font "CaskaydiaMono Nerd Font Mono"
+											:font "JetBrainsMono Nerd Font Mono"
 											:height 140))
 
 ;; Resizing a frame rounds its sizes to the frame's
