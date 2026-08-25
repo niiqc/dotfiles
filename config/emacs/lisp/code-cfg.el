@@ -137,11 +137,22 @@
 
 ;; ======================================================================
 ;; Guile
+;; emacs-arei: guix shell emacs emacs-arei -- emacs
+;; repl: guix shell guile-ares-rs -- ares-nrepl 
 ;; ======================================================================
-
 (use-package geiser-guile
+	:when (not (locate-library "arei.el"))
+	:custom (geiser-mode-start-repl-p t)
 	:defer t
 	:ensure t)
+
+(use-package geiser
+  :when (locate-library "arei.el")
+  :custom (geiser-mode-auto-p nil))
+
+(use-package arei
+  :when (locate-library "arei.el")
+  :init (global-arei-mode))
 
 ;; ======================================================================
 ;; Elisp
