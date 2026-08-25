@@ -226,36 +226,33 @@
 												:render (gt-buffer-render)
 												)))))
 
-(use-package treesit-auto
+(use-package treesit
 	:config
-	(global-treesit-auto-mode)
-	;; Define itens to install
-	(dolist (lang '(bash c cpp css dockerfile html json lua python rust yaml tsx typescript javascript))
-		(unless (treesit-language-available-p lang)
-			(treesit-install-language-grammar lang)))
+	(let ((lang-file-alist '((bash            . sh-script)
+													 (c               . c-ts-mode)
+													 (cpp             . c-ts-mode)
+													 (css             . css-mode)
+													 (dockerfile      . dockerfile-ts-mode)
+													 (elixir          . elixir-ts-mode)
+													 (heex            . heex-ts-mode)
+													 (html            . html-ts-mode)
+													 (json            . json-ts-mode)
+													 (lua             . lua-ts-mode)
+													 (markdown        . markdown-ts-mode)
+													 (markdown-inline . markdown-ts-mode)
+													 (python          . python)
+													 (rust            . rust-ts-mode)
+													 (yaml            . yaml-ts-mode))))
+		(mapc (lambda (lang)
+						(unless (treesit-language-available-p lang)
+							(require (alist-get lang lang-file-alist) nil t)
+							(treesit-install-language-grammar lang)))
+					(mapcar #'car lang-file-alist)))
 	:custom
-	(treesit-auto-install t)
+	(treesit-auto-install-grammar 'always)
+	(treesit-enabled-modes t)
 	(treesit-font-lock-level 4)
-	:init
-	(setopt treesit-language-source-alist
-				'((bash				. ("https://github.com/tree-sitter/tree-sitter-bash.git" "v0.23.3"))
-					(c					. ("https://github.com/tree-sitter/tree-sitter-c.git" "v0.23.6"))
-					(cpp				. ("https://github.com/tree-sitter/tree-sitter-cpp.git" "v0.23.4"))
-					(css				. ("https://github.com/tree-sitter/tree-sitter-css.git" "v0.23.2"))
-					(dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile" "v0.2.0"))
-					(elixir			. ("https://github.com/elixir-lang/tree-sitter-elixir" "v0.3.4"))
-					(html				. ("https://github.com/tree-sitter/tree-sitter-html.git" "v0.23.2"))
-					(json				. ("https://github.com/tree-sitter/tree-sitter-json.git" "v0.24.8"))
-					(lua				. ("https://github.com/tree-sitter-grammars/tree-sitter-lua" "v0.3.0"))
-					(python			. ("https://github.com/tree-sitter/tree-sitter-python.git" "v0.23.6"))
-					(rust				. ("https://github.com/tree-sitter/tree-sitter-rust.git" "v0.23.3"))
-					(yaml				. ("https://github.com/tree-sitter-grammars/tree-sitter-yaml.git" "v0.7.2"))
-					(tsx				. ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src"))
-					(typescript	. ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src"))
-					(javascript	. ("https://github.com/tree-sitter/tree-sitter-javascript" "v0.21.2" "src"))
-					))
-	:ensure t
-	)
+	:ensure nil)
 
 (use-package elec-pair
 	:config (electric-pair-mode t)
