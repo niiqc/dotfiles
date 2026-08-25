@@ -101,6 +101,7 @@
 							(setq-local tab-width python-indent-offset)
 							(dtrt-indent-mode 0)
 							(dtrt-indent-mode t)))
+
 ;; ======================================================================
 ;; Rust
 ;; ======================================================================
@@ -133,8 +134,7 @@
 		'(progn
 			 (define-key json-ts-mode-map (kbd "M-F") #'json-pretty-print-buffer)))
 	:ensure nil
-	:hook (json-ts-mode . (lambda () (add-hook 'before-save-hook #'json-pretty-print-buffer)))
-	)
+	:hook (json-ts-mode . (lambda () (add-hook 'before-save-hook #'json-pretty-print-buffer))))
 
 ;; ======================================================================
 ;; Guile

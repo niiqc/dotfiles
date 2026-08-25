@@ -118,10 +118,9 @@
 	:defer t
 	:custom
 	(whitespace-style '(face tabs spaces trailing space-mark tab-mark))
-	(whitespace-display-mappings '((space-mark ?\	 [?·])
-																 (tab-mark ?\t [?→ ?\t])
-																 )
-															 ))
+	(whitespace-display-mappings '((space-mark ?\  [?·])
+																 (tab-mark ?\t [?→ ?\t])))
+	:ensure nil)
 
 ;; Diff-hl
 (use-package diff-hl
