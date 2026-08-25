@@ -23,7 +23,7 @@
 			"Intall all LSPs/linters based on a list preset"
 			(interactive)
 			(dolist (pkg '("rassumfrassum" "zuban" "ruff" "vtsls" "biome"
-										 "typos-lsp" "rust-analyzer"))
+										 "typos-lsp" "rust-analyzer clangd"))
 				(unless (mason-installed-p pkg)
 					(ignore-errors (mason-install pkg)))))
 		:ensure t))
@@ -186,5 +186,20 @@
 (use-package dockerfile-mode
 	:defer t
 	:ensure t)
+
+;; ======================================================================
+;; C-lang
+;; ======================================================================
+(use-package eglot
+ 	:ensure nil
+	:config (add-to-list 'eglot-server-programs
+											 '(c-ts-mode . ("clangd"
+																			"--background-index"
+																			"--clang-tidy"
+																			"--header-insertion=iwyu"
+																			"--completion-style=detailed"
+																			"--function-arg-placeholders"
+																			"--fallback-style=llvm")))
+	:hook (c-ts-mode . eglot-ensure))
 
 (provide 'code-cfg)
