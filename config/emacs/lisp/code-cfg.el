@@ -44,6 +44,15 @@
 	(magit-format-file-function #'magit-format-file-nerd-icons)
 	:ensure t)
 
+(use-package yasnippet
+	:ensure t
+	:config
+	(yas-global-mode 1))
+
+(use-package yasnippet-snippets
+	:after yasnippet
+	:ensure t)
+
 ;; ======================================================================
 ;; Javascript
 ;; ======================================================================
@@ -72,12 +81,6 @@
 
 (use-package typescript-ts-mode
 	:mode ("\\.ts\\'"))
-
-(use-package yasnippet
-	:defer t
-	:ensure t
-	:config
-	(yas-global-mode 1))
 
 ;; ======================================================================
 ;; Python
