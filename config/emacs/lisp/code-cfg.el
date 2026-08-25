@@ -12,18 +12,21 @@
 	(eglot-documentation-renderer 'markdown-ts-view-mode)
 	(eldoc-display-functions '(eldoc-display-in-buffer)))
 
-(use-package mason
-	:config
-	(mason-setup)
-	(defun my/mason-setup ()
-		"Install all LSP's/linters based on a list preset"
-		(interactive)
-		(mason-ensure
-		 (lambda ()
-			         (dolist (pkg '("rassumfrassum" "zuban" "ruff" "vtsls" "biome" "html-lsp" "css-lsp" "typos-lsp" "rust-analyzer"))
+(unless (with-temp-buffer ; Do not install mason when using Guix.
+					(when (file-exists-p "/etc/os-release")
+						(insert-file-contents "/etc/os-release")
+						(re-search-forward "^ID=guix$" nil t)))
+	(use-package mason
+		:config
+		(mason-setup)
+		(defun my/mason-install-all ()
+			"Intall all LSPs/linters based on a list preset"
+			(interactive)
+			(dolist (pkg '("rassumfrassum" "zuban" "ruff" "vtsls" "biome"
+										 "typos-lsp" "rust-analyzer"))
 				(unless (mason-installed-p pkg)
-					(ignore-errors (mason-install pkg)))))))
-	:ensure t)
+					(ignore-errors (mason-install pkg)))))
+		:ensure t))
 
 (use-package dape
 	:defer t
