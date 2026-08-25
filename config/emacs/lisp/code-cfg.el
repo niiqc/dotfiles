@@ -9,6 +9,7 @@
 	(eglot-autoshutdown t)
 	(eglot-code-action-indications nil)
 	(eldoc-echo-area-use-multiline-p nil)
+	(eglot-documentation-renderer 'markdown-ts-view-mode)
 	(eldoc-display-functions '(eldoc-display-in-buffer)))
 
 (use-package mason
@@ -222,38 +223,5 @@
 (use-package dockerfile-mode
 	:defer t
 	:ensure t)
-
-;; ======================================================================
-;; Markdown
-;; ======================================================================
-(use-package markdown-toc
-	:ensure t
-	:custom
-	(markdown-toc-preset 'pandoc)
-	:after markdown-mode)
-
-(use-package markdown-mode
-	:ensure t
-	:custom
-	(markdown-fontify-code-blocks-natively t)
-	(markdown-enable-wiki-links t)
-	(markdown-italic-underscore t)
-	(markdown-asymmetric-header t)
-	(markdown-make-gfm-checkboxes-buttons t)
-	(markdown-gfm-uppercase-checkbox t)
-	(markdown-enable-math t)
-	(markdown-content-type "application/xhtml+xml")
-	:init
-	(delete 'markdown treesit-auto-langs)
-	(add-to-list 'auto-mode-alist
-							 '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
-	(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
-	:bind (:map markdown-mode-map
-							("C-c C-e" . markdown-do)))
-
-(use-package markdown-indent-mode
-	:ensure t
-	:hook ((markdown-mode . markdown-indent-mode)
-				 (gfm-mode . markdown-indent-mode)))
 
 (provide 'code-cfg)
