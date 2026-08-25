@@ -73,46 +73,6 @@
 (use-package typescript-ts-mode
 	:mode ("\\.ts\\'"))
 
-;; ======================================================================
-;; Html | css
-;; ======================================================================
-(use-package edit-indirect
-	:defer t
-	:vc (:url "https://github.com/Fanael/edit-indirect.git"
-						:branch "master"))
-
-(use-package web-mode
-	:ensure t
-	:hook (web-mode . web-mode-use-tabs)
-	:mode ("\\.html\\'"))
-
-(use-package eglot
-	:ensure nil
-	:config
-	(add-to-list
-	 'eglot-server-programs
-	 '((web-mode :language-id "html")
-		 . ("rass"
-				"--"
-				"biome" "lsp-proxy"
-				"--"
-				"vscode-html-language-server" "--stdio")))
-	:hook (web-mode . eglot-ensure))
-
-(use-package eglot
-	:ensure nil
-	:config
-	(add-to-list
-	 'eglot-server-programs
-	 '((css-ts-mode :language-id "css")
-		 (css-mode :language-id "css")
-		 . ("rass"
-				"--"
-				"biome" "lsp-proxy"
-				"--"
-				"vscode-css-language-server" "--stdio")))
-	:hook ((css-ts-mode css-mode) . eglot-ensure))
-
 (use-package yasnippet
 	:defer t
 	:ensure t
