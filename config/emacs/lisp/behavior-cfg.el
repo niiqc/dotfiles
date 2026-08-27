@@ -277,6 +277,11 @@
 	;; Set dired default args do be more organized.
 	(dired-listing-switches "-al --human-readable --group-directories-first --no-group --dired"))
 
+(use-package envrc
+  :ensure t
+  :config
+  (envrc-global-mode))
+
 (use-package csv-mode
 	:defer t
 	:ensure t)
