@@ -1,0 +1,12 @@
+[user]
+	name = nick
+	email = nicholascaitong@gmail.com
+	signingkey = CB9A70FACE87C135
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
+[push]
+	autoSetupRemote = true
+[mergetool]
+	conflictStyle = zdiff3
