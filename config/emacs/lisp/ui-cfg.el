@@ -22,36 +22,9 @@
 (use-package dashboard
 	:ensure t
 	:custom
-	(initial-buffer-choice 'dashboard-open)
-	(dashboard-startupify-list '(dashboard-insert-banner
-															 dashboard-insert-newline
-															 dashboard-insert-banner-title
-															 dashboard-insert-newline
-															 dashboard-insert-navigator
-															 dashboard-insert-newline
-															 dashboard-insert-init-info
-															 dashboard-insert-items
-															 dashboard-insert-newline
-															 dashboard-insert-footer))
-	(dashboard-navigator-buttons
-	 `(
-		 ((,(nerd-icons-devicon "nf-dev-git" :height 1.1 :v-adjust 0.0)
-			 ""
-			 "Browse homepage"
-			 (lambda (&rest _) (browse-url "https://codeberg.org/niqc")))
-			(,(nerd-icons-mdicon "nf-md-refresh" :height 1.1 :v-adjust 0.0)
-			 ""
-			 "Clear zombie items from recents and projects"
-			 (lambda (&rest _)
-				 (recentf-cleanup)
-				 (project-forget-zombie-projects)
-				 (message "Clear!")
-				 ))
-			)))
 	(dashboard-banner-logo-title "Welcome to Emacs!")
 	(dashboard-startup-banner (locate-user-emacs-file "banner.txt"))
 	(dashboard-icon-type 'nerd-icons)
-	(dashboard-navigation-cycle t)
 	(dashboard-set-heading-icons t)
 	(dashboard-set-file-icons t)
 	(dashboard-vertically-center-content t)
