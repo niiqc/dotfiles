@@ -146,9 +146,6 @@
 
 (use-package breadcrumb
 	:config (breadcrumb-mode t)
-	:custom
-	(breadcrumb-imenu-crumb-separator " > ")
-	(breadcrumb-project-crumb-separator " > ")
 	:ensure t)
 
 ;; Configurations for graphic mode
