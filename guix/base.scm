@@ -21,7 +21,7 @@
 	#:use-module (gnu services xorg)
 	#:use-module (gnu services sddm)
 	#:use-module (gnu services virtualization)
-	#:use-module (gnu services networking) ; nftables-service-type
+	#:use-module (gnu services networking) ; nftables-service-type, nftables-configuration
 	#:use-module (gnu services containers) ; rootless-podman-service-type, rootless-podman-configuration
 
 	#| Guix |#
@@ -54,6 +54,25 @@
 	(plain-file "nonguix.pub"
 							"(public-key (ecc (curve Ed25519)
  (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
+
+(define ruleset-nftables
+	(plain-file "nftables.conf"
+							"\
+table inet filter {
+  chain input {
+    type filter hook input priority filter; policy accept;
+  }
+
+  chain forward {
+    type filter hook forward priority filter; policy drop;
+    iifname \"virbr0\" accept
+    oifname \"virbr0\" accept
+  }
+
+  chain output {
+    type filter hook output priority filter; policy accept;
+  }
+}"))
 
 (define base
 	(operating-system
@@ -134,8 +153,10 @@
                 etc-service-type
                 (list `("qemu/bridge.conf"
                         ,(plain-file "bridge.conf" "allow virbr0\n"))))
-
-			(service nftables-service-type)
+			
+			(service nftables-service-type
+							 (nftables-configuration
+								(ruleset ruleset-nftables)))
 			
 			(service rootless-podman-service-type
 							 (rootless-podman-configuration
