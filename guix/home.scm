@@ -121,20 +121,16 @@
 									 home-shepherd-service-type
 									 (list (shepherd-service
 													(provision '(podman-socket))
-													(modules '((guix build utils)))
-													(start
-													 #~(let* ((runtime-dir (or (getenv "XDG_RUNTIME_DIR")
-																										 (string-append
-																											"/run/user/"
-																											(number->string (getuid)))))
-																		(socket-dir (string-append runtime-dir "/podman")))
-															 (mkdir-p socket-dir)
-															 (make-forkexec-constructor
-																(list #$(file-append podman "/bin/podman")
-																			"system" "service" "--time=0"
-																			(string-append "unix://" socket-dir
-																										 "/podman.sock")))))
-													(stop #~(make-kill-destructor)))))
+													(documentation "Rootless Podman REST API service.")
+													(start #~(make-systemd-constructor
+																		(list #$(file-append podman "/bin/podman")
+																					"system" "service" "--time=0")
+																		(list (endpoint
+																					 (make-socket-address
+																						AF_UNIX
+																						(string-append (getenv "XDG_RUNTIME_DIR")
+																													 "/podman/podman.sock"))))))
+													(stop #~(make-systemd-destructor)))))
 
 	 (simple-service 'home-shell-environment-variables
 									 home-environment-variables-service-type
