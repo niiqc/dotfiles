@@ -277,6 +277,13 @@
 	;; Set dired default args do be more organized.
 	(dired-listing-switches "-al --human-readable --group-directories-first --no-group --dired"))
 
+(use-package completion-preview
+	:ensure nil
+	:demand t
+	:config
+	(setopt completion-preview-minimum-symbol-length 2)
+	(global-completion-preview-mode 1))
+
 (use-package envrc
   :ensure t
   :config
