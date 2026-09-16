@@ -122,16 +122,16 @@
 
 ;; Resizing a frame rounds its sizes to the frame's
 (setopt frame-resize-pixelwise t
-
-				;; Show relative line numbers
-				display-line-numbers-type 'relative
-
 				;; Use bar cursor shape
 				cursor-type 'bar)
 
 
-;; Global line numbers
-(global-display-line-numbers-mode)
+;; Line numbers
+(use-package display-line-numbers
+	:ensure nil
+	:custom
+	(display-line-numbers-type 'relative)
+	:hook ((prog-mode text-mode conf-mode) . display-line-numbers-mode))
 
 ;; Disable line numbers in specific modes
 (dolist (mode '(eshell-mode-hook dired-mode-hook image-mode-hook doc-view-mode-hook))
