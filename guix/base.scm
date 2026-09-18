@@ -91,10 +91,10 @@ table inet filter {
 								 %base-user-accounts))
 
 	 (privileged-programs
-    (append (list (privileged-program
-                   (program (file-append qemu "/libexec/qemu-bridge-helper"))
-                   (setuid? #t)))
-            %default-privileged-programs))
+		(append (list (privileged-program
+									 (program (file-append qemu "/libexec/qemu-bridge-helper"))
+									 (setuid? #t)))
+						%default-privileged-programs))
 
 	 (packages
 		(append
@@ -136,14 +136,14 @@ table inet filter {
 								(max-clients 1000)))
 
 			(simple-service 'qemu-bridge-config
-                etc-service-type
-                (list `("qemu/bridge.conf"
-                        ,(plain-file "bridge.conf" "allow virbr0\n"))))
-			
+								etc-service-type
+								(list `("qemu/bridge.conf"
+												,(plain-file "bridge.conf" "allow virbr0\n"))))
+
 			(service nftables-service-type
 							 (nftables-configuration
 								(ruleset ruleset-nftables)))
-			
+
 			(service rootless-podman-service-type
 							 (rootless-podman-configuration
 								(subgids (list (subid-range (name "nick"))))
