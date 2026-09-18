@@ -36,20 +36,6 @@
 
 	#:export (base))
 
-(define channels-with-nonguix
-	(list (channel
-				 (inherit %default-guix-channel)
-				 (name 'guix)
-				 (url "https://git.guix.gnu.org/guix.git"))
-				(channel
-				 (name 'nonguix)
-				 (url "https://gitlab.com/nonguix/nonguix.git")
-				 (introduction
-					(make-channel-introduction
-					 "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
-					 (openpgp-fingerprint
-						"2A39 3FFF 68F4 EF7A 3D29	 12AF 6F51 20A0 22FB B2D5"))))))
-
 (define nonguix-signing-key
 	(plain-file "nonguix.pub"
 							"(public-key (ecc (curve Ed25519)
@@ -177,9 +163,4 @@ table inet filter {
 												(authorized-keys (list nonguix-signing-key)))))
 
 		 (modify-services %desktop-services
-											;; Set up Nonguix channel in /etc/guix/channels.scm.
-											(delete gdm-service-type)
-											(guix-service-type config =>
-																				 (guix-configuration (inherit config)
-																														 (channels
-																															channels-with-nonguix))))))))
+											(delete gdm-service-type))))))
