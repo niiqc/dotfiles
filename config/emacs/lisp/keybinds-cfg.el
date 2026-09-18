@@ -1,13 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 
 ;; Navigation
-(define-prefix-command 'my/window-map)
-(global-set-key (kbd "C-c w") 'my/window-map)
-
-(define-key my/window-map (kbd "h") #'split-window-below)
-(define-key my/window-map (kbd "v") #'split-window-right)
-(define-key my/window-map (kbd "d") #'delete-window)
-
 (global-set-key (kbd "<next>") (lambda () (interactive) (vertical-motion 20)))
 (global-set-key (kbd "<prior>") (lambda () (interactive) (vertical-motion -20)))
 
