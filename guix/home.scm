@@ -40,6 +40,8 @@
  (gnu packages virtualization) ; libvirt
  (gnu packages kde-xyz) ; plasma-applet-kde-material-you-colors
  (gnu packages containers) ; podman podman-compose
+ (gnu packages tor-browsers) ; tor-browser
+ (gnu packages sync) ; rclone
  (nongnu packages game-client) ; protonup steam
  (guix gexp) ; local-file
  (guix channels) ; guix channels
@@ -76,6 +78,8 @@
 	 podman
 	 podman-compose
 	 font-nerd-jetbrains-mono
+	 torbrowser
+	 rclone
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
