@@ -124,6 +124,24 @@
 	:custom
 	(window-sides-vertical t))
 
+(use-package tempel
+	:bind
+	("M-+" . tempel-complete)
+	("M-*" . tempel-insert)
+	:ensure t
+	:hook
+	((conf-mode prog-mode text-mode)
+	 . (lambda () (setq-local completion-at-point-functions
+														(mapcar (lambda (capf)
+																			(if (eq capf t)
+																					t
+																				(cape-capf-super capf #'tempel-complete)))
+																		completion-at-point-functions)))))
+
+(use-package tempel-collection
+	:after tempel
+	:ensure t)
+
 (use-package cape
 	:after corfu
 	:bind ("C-c p" . cape-prefix-map)
