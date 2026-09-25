@@ -110,7 +110,7 @@
 	(corfu-separator ?\s)
 	(corfu-quit-no-match 'separator)
 	(corfu-preview-current 'insert)
-	(corfu-preselect-first t)
+	(corfu-preselect 'first)
 	(corfu-popupinfo-max-width 80)
 	(corfu-popupinfo-max-height 14)
 	(corfu-popupinfo-resize t)
@@ -124,23 +124,24 @@
 	:custom
 	(window-sides-vertical t))
 
-(defun my/eglot-capf ()
-	(setq-local completion-at-point-functions
-							(list (cape-capf-super
-										 #'eglot-completion-at-point
-										 #'cape-dabbrev
-										 #'cape-keyword
-										 ))))
-
 (use-package cape
-	:bind("C-c p" . cape-prefix-map)
+	:after corfu
+	:bind ("C-c p" . cape-prefix-map)
+	:config
+	(advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+	(advice-add 'eglot-completion-at-point :before-while #'eglot-managed-p)
 	:ensure t
-	:config (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-	:hook (eglot-managed-mode . my/eglot-capf)
+	:hook
+	(eglot-managed-mode
+	 . (lambda ()
+			 (setq-local completion-at-point-functions (list (cape-capf-super
+																												#'eglot-completion-at-point
+																												#'cape-dabbrev
+																												#'cape-keyword)))))
 	:init
-  (add-hook 'completion-at-point-functions #'cape-dabbrev)
-  (add-hook 'completion-at-point-functions #'cape-file)
-  (add-hook 'completion-at-point-functions #'cape-elisp-block))
+	(add-hook 'completion-at-point-functions #'cape-dabbrev)
+	(add-hook 'completion-at-point-functions #'cape-file)
+	(add-hook 'completion-at-point-functions #'cape-keyword))
 
 ;; Enable Vertico.
 (use-package vertico

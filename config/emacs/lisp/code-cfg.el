@@ -30,6 +30,7 @@
 
 (use-package dape
 	:defer t
+	:commands (dape dape-breakpoint-toggle)
 	:custom
 	(dape-buffer-window-arrangement 'right)
 	(dape-request-timeout 60)
@@ -130,13 +131,9 @@
 ;; ======================================================================
 ;; Json
 ;; ======================================================================
-(use-package json
-	:config
-	(eval-after-load 'json-ts-mode
-		'(progn
-			 (define-key json-ts-mode-map (kbd "M-F") #'json-pretty-print-buffer)))
-	:ensure nil
-	:hook (json-ts-mode . (lambda () (add-hook 'before-save-hook #'json-pretty-print-buffer))))
+(use-package json-ts-mode
+	:bind (:map json-ts-mode-map ("C-c e f" . json-pretty-print-buffer))
+	:ensure nil)
 
 ;; ======================================================================
 ;; Guile

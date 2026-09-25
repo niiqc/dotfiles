@@ -144,7 +144,7 @@
 (column-number-mode t)
 
 ;; Simplify message yes or no p
-(fset 'yes-or-no-p 'y-or-n-p)
+(setopt use-short-answers t)
 
 ;; Disable cursor blinking
 (blink-cursor-mode 0)
