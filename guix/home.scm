@@ -12,7 +12,7 @@
  (gnu packages linux) ; wirepluber
  (gnu packages glib) ; glib
  (gnu packages kde-utils) ; ark kate kcalc
- (gnu packages kde-plasma) ; plasma-disks plasma-browser-integration
+ (gnu packages kde-plasma) ; plasma-disks
  (gnu packages kde-internet) ; kdeconnect
  (gnu packages qt) ; qtbase
  (gnu packages commencement) ; gcc-toolchain
@@ -72,7 +72,6 @@
 	 protonup
 	 vlc
 	 gwenview
-	 plasma-browser-integration
 	 starship
 	 direnv
 	 podman
