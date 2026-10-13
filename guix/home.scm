@@ -21,7 +21,7 @@
  (gnu packages rust-apps) ; ripgrep uv
  (gnu packages package-management) ; flatpak
  (gnu packages gtk) ; appmenu-gtk-module libdbusmenu
- (gnu packages shells) ; fish
+ (gnu packages shells) ; fish fish-foreign-env
  (gnu packages shellutils) ; starship direnv
  (gnu packages gtk) ; appmenu-gtk-module libdbusmenu
  (gnu packages gnupg) ; gnupg
@@ -83,6 +83,7 @@
 	 firefox
 	 pandoc
 	 qpwgraph
+	 fish-foreign-env
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
@@ -112,11 +113,17 @@
 						 (pinentry-program
 							(file-append pinentry "/bin/pinentry"))))
 
+	 (simple-service 'fish-setup-environment
+									 home-files-service-type
+									 `((".config/fish/conf.d/00-guix-home.fish"
+											,(plain-file "guix-env.fish"
+																	 "if status is-login; and not set -q __guix_home_sourced
+    set --prepend fish_function_path ~/.guix-home/profile/share/fish/functions
+    fenv source ~/.profile
+    set -e fish_function_path[1]
+    set -g __guix_home_sourced 1
+end"))))
 
-	 (service home-bash-service-type
-						(home-bash-configuration
-						 (aliases '())
-						 (bashrc (list (local-file "/home/nick/.bashrc" "bashrc")))))
 	 (service home-pipewire-service-type)
 
 	 (service home-xdg-user-directories-service-type)
