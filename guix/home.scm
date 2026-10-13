@@ -9,7 +9,7 @@
  (gnu home services guix) ; guix channels
  (gnu home services ssh) ; home-ssh-agent-service-type
  (gnu home services shepherd) ; home-shepherd-service-type
- (gnu packages linux) ; wirepluber
+ (gnu packages audio) ; qpwgraph
  (gnu packages glib) ; glib
  (gnu packages kde-utils) ; ark kate kcalc
  (gnu packages kde-plasma) ; plasma-disks
@@ -39,6 +39,7 @@
  (gnu packages video); vlc
  (gnu packages virtualization) ; libvirt
  (gnu packages kde-xyz) ; plasma-applet-kde-material-you-colors
+ (gnu packages haskell-xyz) ; pandoc
  (gnu packages containers) ; podman podman-compose
  (gnu packages tor-browsers) ; tor-browser
  (gnu packages sync) ; rclone
@@ -80,6 +81,8 @@
 	 torbrowser
 	 rclone
 	 firefox
+	 pandoc
+	 qpwgraph
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
@@ -109,14 +112,12 @@
 						 (pinentry-program
 							(file-append pinentry "/bin/pinentry"))))
 
-	 (service home-pipewire-service-type
-						(home-pipewire-configuration
-						 (wireplumber wireplumber-minimal)))
 
 	 (service home-bash-service-type
 						(home-bash-configuration
 						 (aliases '())
 						 (bashrc (list (local-file "/home/nick/.bashrc" "bashrc")))))
+	 (service home-pipewire-service-type)
 
 	 (service home-xdg-user-directories-service-type)
 
@@ -138,7 +139,10 @@
 	 (simple-service 'home-shell-environment-variables
 									 home-environment-variables-service-type
 									 `(("PATH" . "$HOME/.local/bin:$PATH")
-										 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS")
+										 ("XDG_DATA_DIRS" . ,(string-append
+																					"/var/lib/flatpak/exports/share:"
+																					"$XDG_DATA_HOME/flatpak/exports/share:"
+																					"$XDG_DATA_DIRS"))
 										 ("LESSOPEN" . "| src-hilite-lesspipe.sh %s")
 										 ("LESS" . " --raw-control-chars --tabs 2 --LINE-NUMBERS ")))
 
