@@ -52,6 +52,10 @@
 	:hook (org-modern-mode . org-modern-indent-init)
 	:vc (:url "https://github.com/jdtsmith/org-modern-indent" :branch "main"))
 
+(use-package htmlize
+	:ensure t
+	:defer t)
+
 ;; Create toggle for "preview" org modern
 (with-eval-after-load 'org
 	(setq org-preview-enable nil)
