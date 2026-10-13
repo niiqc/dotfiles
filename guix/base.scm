@@ -14,7 +14,7 @@
 	#:use-module (gnu system accounts) ; subid-range
 	#:use-module (gnu services)
 	#:use-module (gnu services base)
-	#:use-module (gnu services desktop)
+	#:use-module (gnu services desktop) ; plasma-desktop-service-type kwallet-service-type
 	#:use-module (gnu services linux)
 	#:use-module (gnu services pm)
 	#:use-module (gnu services sysctl)
@@ -109,6 +109,8 @@ table inet filter {
 		(append
 		 (list
 			(service plasma-desktop-service-type)
+
+			(service kwallet-service-type)
 
 			;; Sddm
 			(service sddm-service-type
