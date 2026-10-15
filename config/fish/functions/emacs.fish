@@ -1,8 +1,8 @@
-function emacs
-    set emacspath (which emacs)
+function emacs --wraps emacs --description 'Run Emacs detached, except in terminal mode'
     if contains -- --help $argv; or contains -- --no-window-system $argv; or contains -- -nw $argv
-        $emacspath $argv >/dev/null 2>&1
+        command emacs $argv
     else
-        $emacspath $argv >/dev/null 2>&1 &
+        command emacs $argv >/dev/null 2>&1 &
+        disown
     end
 end

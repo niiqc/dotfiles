@@ -26,8 +26,8 @@
 
 	#| Guix |#
 	#:use-module (guix channels)
-
-	#| Nonguix |#
+	
+#| Nonguix |#
 	#:use-module (nongnu packages linux)
 	#:use-module (nongnu system linux-initrd)
 

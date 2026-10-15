@@ -7,9 +7,9 @@
 	(org-startup-indented t)
 	(org-src-tab-acts-natively t)
 	(org-src-fontify-natively t)
+	(org-directory "~/OneDrive/org")
 	:hook (org-mode .	(lambda ()
 											 (setq-local visual-line-move-text t)
-											 (setq-local fill-column 100)
 											 (display-fill-column-indicator-mode 1)))
 	:config
 	(setopt org-ellipsis " ⤵"
@@ -17,11 +17,10 @@
 					org-fontify-whole-heading-line t
 					org-fontify-done-headline t
 					org-fontify-quote-and-verse-blocks t
-					org-src-preserve-indentation t)
-
-	(org-babel-do-load-languages
-	 'org-babel-load-languages
-	 '((mermaid . t))))
+					org-src-preserve-indentation t))
+	;; (org-babel-do-load-languages
+	;;  'org-babel-load-languages
+	;;  '((python-ts-mode . t))))
 
 (use-package outline-mode
 	:custom
