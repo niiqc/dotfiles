@@ -152,4 +152,8 @@
 ;; Enable which key
 (which-key-mode)
 
+;; Fill column indicator
+(setopt display-fill-column-indicator-column 80)
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+
 (provide 'ui-cfg)
