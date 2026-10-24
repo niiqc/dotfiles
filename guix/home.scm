@@ -45,6 +45,7 @@
  (gnu packages sync) ; rclone
  (nongnu packages game-client) ; protonup steam
  (nongnu packages mozilla) ; firefox
+ (tuco packages games) ; lsfg-vk
  (guix gexp) ; local-file
  (guix channels) ; guix channels
  (tuco packages virtualization)) ; quickemu
@@ -70,6 +71,7 @@
 	 quickemu
 	 libvirt
 	 steam
+	 lsfg-vk
 	 protonup
 	 vlc
 	 gwenview
