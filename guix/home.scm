@@ -45,12 +45,23 @@
 	#:use-module (gnu packages sync) ; rclone
 	#:use-module (gnu packages ncdu) ; ncdu
 	#:use-module (gnu packages xdisorg) ; wl-clipboard
+	#:use-module (gnu packages gl) ; mesa
 	#:use-module (nongnu packages game-client) ; protonup steam
+	#:use-module (nonguix multiarch-container) ; nonguix-container, fhs-union
 	#:use-module (nongnu packages mozilla) ; firefox
 	#:use-module (tuco packages games) ; lsfg-vk
 	#:use-module (guix gexp) ; local-file
 	#:use-module (guix channels) ; guix channels
 	#:use-module (tuco packages virtualization)) ; quickemu
+
+(define steam-lsfg-vk
+	(nonguix-container->package
+	 (nonguix-container
+		(inherit (steam-container-for mesa))
+		(union64
+		 (fhs-union `(,@(@@ (nongnu packages game-client) steam-container-libs)
+									("lsfg-vk" ,lsfg-vk))
+								#:name "fhs-union-64")))))
 
 (define home
 	(home-environment
@@ -73,7 +84,7 @@
 		 jq
 		 quickemu
 		 libvirt
-		 steam
+		 steam-lsfg-vk
 		 lsfg-vk
 		 protonup
 		 vlc
