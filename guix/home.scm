@@ -28,13 +28,13 @@
  (gnu packages base) ; coreutils
  (gnu packages emacs) ; emacs
  (gnu packages fonts) ; font-nerd-jetbrains-mono
- (gnu packages version-control) ; git
+ (gnu packages version-control) ; git hut
  (gnu packages xdisorg) ; xsettingsd
  (gnu packages ssh) ; openssh
  (gnu packages rust-apps) ; ripgrep
  (gnu packages xorg) ; xrdb
  (gnu packages pretty-print) ; source-highlight
- (gnu packages freedesktop) ; xdg-desktop-portal-(kde|gtk)
+ (gnu packages freedesktop) ; xdg-desktop-portal-(kde|gtk) xdg-utils
  (gnu packages web); jq
  (gnu packages video); vlc
  (gnu packages virtualization) ; libvirt
@@ -43,6 +43,8 @@
  (gnu packages containers) ; podman podman-compose
  (gnu packages tor-browsers) ; tor-browser
  (gnu packages sync) ; rclone
+ (gnu packages ncdu) ; ncdu
+ (gnu packages xdisorg) ; wl-clipboard
  (nongnu packages game-client) ; protonup steam
  (nongnu packages mozilla) ; firefox
  (tuco packages games) ; lsfg-vk
@@ -86,6 +88,10 @@
 	 pandoc
 	 qpwgraph
 	 fish-foreign-env
+	 wl-clipboard
+	 ncdu
+	 hut
+	 xdg-utils
 	 ;; pkg manager
 	 flatpak
 	 ;; deps
