@@ -115,6 +115,7 @@
 		 emacs-next-pgtk
 		 ripgrep
 		 git
+		 (list git "send-email")
 		 gcc-toolchain
 		 xsettingsd
 		 xdg-desktop-portal-gtk
@@ -158,7 +159,11 @@
 																						"/var/lib/flatpak/exports/share:"
 																						"$XDG_DATA_HOME/flatpak/exports/share:"
 																						"$XDG_DATA_DIRS"))
-											 ("LESSOPEN" . "| src-hilite-lesspipe.sh %s")
+											 ("LESSOPEN" . ,#~(string-append
+																				 "| "
+																				 #$(file-append source-highlight
+																												"/bin/src-hilite-lesspipe.sh")
+																				 " %s"))
 											 ("LESS" . " --raw-control-chars --tabs 2 --LINE-NUMBERS ")))
 
 		 (simple-service 'home-extra-channels
