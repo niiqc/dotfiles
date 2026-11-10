@@ -179,7 +179,7 @@
 													 (channel
 														(name 'tuco)
 														(branch "main")
-														(url "https://codeberg.org/niqc/tuco")
+														(url "https://git.sr.ht/~niqc/tuco")
 														(introduction
 														 (make-channel-introduction
 															"5728b7a5854267de9ef9f30300d946fbb72f8ea4"
