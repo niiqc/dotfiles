@@ -84,4 +84,27 @@
 
 	(doom-modeline-add-segment 'my/org-modern-preview-segment 'indent-info :before))
 
+(use-package vulpea
+	:ensure t
+	:bind (:map org-mode-map ("C-c v i" . vulpea-insert))
+	:after org
+	:custom
+	(vulpea-db-async-extraction 'full)
+	(vulpea-db-parse-method 'single-temp-buffer)
+	(vulpea-db-index-plain-links nil)
+	:config
+	(vulpea-db-autosync-mode t))
+
+(use-package vulpea-ui
+	:ensure t
+	:bind (:map org-mode-map ("C-c v s" . vulpea-ui-sidebar-toggle))
+	:after vulpea
+	:custom
+	(vulpea-ui-sidebar-position 'right)
+	(vulpea-ui-backlinks-show-preview t)
+	(vulpea-ui-backlinks-prose-chars-before 30)
+	(vulpea-ui-backlinks-prose-chars-after 50)
+	(vulpea-ui-backlinks-context-types t)
+	(vulpea-ui-backlinks-sort 'title-asc))
+
 (provide 'org-cfg)
